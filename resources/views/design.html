@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ফন্টবাজার - বাংলাদেশের প্রথম ফন্ট মার্কেটপ্লেস</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+        }
+        .font-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .font-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+        .bengali-text {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-font text-blue-600 text-2xl"></i>
+                    <span class="text-2xl font-bold text-blue-600">ফন্টবাজার</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition">হোম</a>
+                    <a href="#fonts" class="text-gray-700 hover:text-blue-600 transition">ফন্টসমূহ</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-blue-600 transition">মূল্য নির্ধারণ</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition">আমাদের সম্পর্কে</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-blue-600 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="text-gray-700 hover:text-blue-600 transition">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <button class="btn-primary text-white px-4 py-2 rounded-lg font-medium">লগইন</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bengali-text">
+                বাংলার সেরা ফন্ট মার্কেটপ্লেস
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 bengali-text">
+                ১০০০+ প্রিমিয়াম বাংলা ফন্ট এবং ফ্রি ফন্ট সংগ্রহ
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition">
+                    বিনামূল্যে ফন্ট এক্সপ্লোর করুন
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-600 transition">
+                    প্রিমিয়াম ফন্ট কিনুন
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Font Categories -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 bengali-text">ফন্ট ক্যাটেগরি</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
+                    <i class="fas fa-pen-fancy text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-semibold bengali-text">হাতের লেখা</h3>
+                </div>
+                <div class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
+                    <i class="fas fa-bold text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-semibold bengali-text">বোল্ড</h3>
+                </div>
+                <div class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
+                    <i class="fas fa-minus text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-semibold bengali-text">পাতলা</h3>
+                </div>
+                <div class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
+                    <i class="fas fa-font text-3xl text-blue-600 mb-3"></i>
+                    <h3 class="font-semibold bengali-text">ডেকোরেটিভ</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Fonts -->
+    <section id="fonts" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 bengali-text">বৈশিষ্ট্যপূর্ণ ফন্ট</h2>
+                <select class="border border-gray-300 rounded-lg px-4 py-2 bengali-text">
+                    <option>সব ফন্ট</option>
+                    <option>ফ্রি ফন্ট</option>
+                    <option>প্রিমিয়াম ফন্ট</option>
+                </select>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Font Card 1 -->
+                <div class="font-card bg-white rounded-lg p-6">
+                    <div class="bg-gray-100 rounded-lg p-8 mb-4 text-center">
+                        <p class="text-3xl text-gray-800 bengali-text">আমার বাংলা</p>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">বাংলা প্রিমিয়াম</h3>
+                    <p class="text-gray-600 mb-3 bengali-text">মডার্ন বাংলা ফন্ট</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">৳৫০০</span>
+                        <button class="btn-primary text-white px-4 py-2 rounded-lg text-sm">কিনুন</button>
+                    </div>
+                </div>
+
+                <!-- Font Card 2 -->
+                <div class="font-card bg-white rounded-lg p-6">
+                    <div class="bg-gray-100 rounded-lg p-8 mb-4 text-center">
+                        <p class="text-3xl text-gray-800 bengali-text">বাংলা সুন্দর</p>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">সুন্দর বাংলা</h3>
+                    <p class="text-gray-600 mb-3 bengali-text">ফ্রি ফন্ট</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-bold text-green-600">ফ্রি</span>
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">ডাউনলোড</button>
+                    </div>
+                </div>
+
+                <!-- Font Card 3 -->
+                <div class="font-card bg-white rounded-lg p-6">
+                    <div class="bg-gray-100 rounded-lg p-8 mb-4 text-center">
+                        <p class="text-3xl text-gray-800 bengali-text">বাংলা ক্লাসিক</p>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">ক্লাসিক প্রো</h3>
+                    <p class="text-gray-600 mb-3 bengali-text">ট্র্যাডিশনাল স্টাইল</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">৳৭৫০</span>
+                        <button class="btn-primary text-white px-4 py-2 rounded-lg text-sm">কিনুন</button>
+                    </div>
+                </div>
+
+                <!-- Font Card 4 -->
+                <div class="font-card bg-white rounded-lg p-6">
+                    <div class="bg-gray-100 rounded-lg p-8 mb-4 text-center">
+                        <p class="text-3xl text-gray-800 bengali-text">বাংলা মডার্ন</p>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">মডার্ন লাইট</h3>
+                    <p class="text-gray-600 mb-3 bengali-text">মিনিমাল ডিজাইন</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">৳৪০০</span>
+                        <button class="btn-primary text-white px-4 py-2 rounded-lg text-sm">কিনুন</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 bengali-text">মূল্য নির্ধারণ</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <!-- Free Plan -->
+                <div class="border border-gray-200 rounded-lg p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4 bengali-text">ফ্রি</h3>
+                    <p class="text-4xl font-bold text-blue-600 mb-4">০৳</p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> ৫০+ ফ্রি ফন্ট</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> ব্যক্তিগত ব্যবহার</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> বাণিজ্যিক লাইসেন্স</li>
+                    </ul>
+                    <button class="w-full border border-blue-600 text-blue-600 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition">
+                        বিনামূল্যে শুরু করুন
+                    </button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="border-2 border-blue-600 rounded-lg p-8 text-center bg-blue-50">
+                    <div class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm inline-block mb-4">জনপ্রিয়</div>
+                    <h3 class="text-2xl font-bold mb-4 bengali-text">প্রো</h3>
+                    <p class="text-4xl font-bold text-blue-600 mb-4">৳১,৫০০<span class="text-lg text-gray-600">/মাস</span></p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> ৫০০+ প্রিমিয়াম ফন্ট</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> বাণিজ্যিক লাইসেন্স</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> ২৪/৭ সাপোর্ট</li>
+                    </ul>
+                    <button class="w-full btn-primary text-white py-2 rounded-lg">
+                        প্রো প্ল্যান কিনুন
+                    </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="border border-gray-200 rounded-lg p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4 bengali-text">এন্টারপ্রাইজ</h3>
+                    <p class="text-4xl font-bold text-blue-600 mb-4">যোগাযোগ করুন</p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> সব ফন্ট অ্যাক্সেস</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> কাস্টম ফন্ট ডিজাইন</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> ডেডিকেটেড সাপোর্ট</li>
+                    </ul>
+                    <button class="w-full border border-blue-600 text-blue-600 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition">
+                        যোগাযোগ করুন
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold text-center mb-8 bengali-text">পেমেন্ট পদ্ধতি</h3>
+            <div class="flex justify-center items-center space-x-8">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <img src="https://via.placeholder.com/60x40/1e40af/ffffff?text=bKash" alt="bKash" class="h-10">
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <img src="https://via.placeholder.com/60x40/1e40af/ffffff?text=Nagad" alt="Nagad" class="h-10">
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <img src="https://via.placeholder.com/60x40/1e40af/ffffff?text=Rocket" alt="Rocket" class="h-10">
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <img src="https://via.placeholder.com/60x40/1e40af/ffffff?text=Card" alt="Card" class="h-10">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-font text-blue-400 text-2xl"></i>
+                        <span class="text-2xl font-bold">ফন্টবাজার</span>
+                    </div>
+                    <p class="text-gray-400 bengali-text">বাংলাদেশের প্রথম এবং সবচেয়ে বড় বাংলা ফন্ট মার্কেটপ্লেস</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 bengali-text">দ্রুত লিঙ্ক</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">সব ফন্ট</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">ফ্রি ফন্ট</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">প্রিমিয়াম ফন্ট</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">লাইসেন্স</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 bengali-text">সাপোর্ট</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">সাহায্য কেন্দ্র</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">যোগাযোগ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">টিউটোরিয়াল</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4 bengali-text">যোগাযোগ করুন</h4>
+                    <div class="space-y-2">
+                        <p class="text-gray-400"><i class="fas fa-envelope mr-2"></i> support@fontbazaar.com.bd</p>
+                        <p class="text-gray-400"><i class="fas fa-phone mr-2"></i> +৮৮০ ১৭১১-২৩৪৫৬৭</p>
+                        <div class="flex space-x-4 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400 bengali-text">&copy; ২০২৪ ফন্টবাজার. সর্বস্বত্ব সংরক্ষিত.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.font-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
