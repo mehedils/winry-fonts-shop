@@ -18,6 +18,7 @@
                 <h4 class="text-lg font-bold mb-4 bengali-text">দ্রুত লিঙ্ক</h4>
                 <ul class="space-y-2">
                     <li><a href="{{ route('fonts.index') }}" class="text-gray-400 hover:text-white transition">সব ফন্ট</a></li>
+                    <li><a href="{{ route('developers') }}" class="text-gray-400 hover:text-white transition">ডেভেলপার</a></li>
                     <li><a href="{{ route('fonts.index') }}?category=free" class="text-gray-400 hover:text-white transition">ফ্রি ফন্ট</a></li>
                     <li><a href="{{ route('fonts.index') }}?category=premium" class="text-gray-400 hover:text-white transition">প্রিমিয়াম ফন্ট</a></li>
                     <li><a href="{{ route('pricing') }}" class="text-gray-400 hover:text-white transition">লাইসেন্স</a></li>

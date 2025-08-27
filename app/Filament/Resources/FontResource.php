@@ -6,6 +6,7 @@ use App\Filament\Resources\FontResource\Pages;
 use App\Filament\Resources\FontResource\RelationManagers;
 use App\Models\Font;
 use App\Models\Contributor;
+use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -27,6 +28,12 @@ class FontResource extends Resource
                 Forms\Components\Section::make('Font Info')
                     ->schema([
                         Forms\Components\TextInput::make('name')->required()->maxLength(255),
+                        Forms\Components\Select::make('category_id')
+                            ->label('Category')
+                            ->options(Category::where('is_active', true)->pluck('name', 'id'))
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Select a category...'),
                         Forms\Components\Textarea::make('description')->rows(4),
                         Forms\Components\DatePicker::make('published_date'),
                         Forms\Components\TextInput::make('price')->numeric()->prefix('৳')->default(0),
@@ -92,6 +99,10 @@ class FontResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\BadgeColumn::make('price')->formatStateUsing(fn ($state) => $state > 0 ? '৳'.number_format($state, 2) : 'ফ্রি'),
                 Tables\Columns\TextColumn::make('glyphs')->sortable(),
                 Tables\Columns\TextColumn::make('published_date')->date()->sortable(),

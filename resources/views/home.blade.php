@@ -46,7 +46,7 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 bengali-text">ফন্ট ক্যাটেগরি</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach($categories as $category)
-                    <a href="{{ route('fonts.category', $category->slug ?? $category->id) }}" class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
+                    <a href="{{ route('fonts.index', ['category' => $category->id]) }}" class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
                         <i class="{{ $category->icon ?? 'fas fa-font' }} text-3xl text-blue-600 mb-3"></i>
                         <h3 class="font-semibold bengali-text">{{ $category->name }}</h3>
                     </a>

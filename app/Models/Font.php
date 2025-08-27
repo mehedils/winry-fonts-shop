@@ -18,6 +18,7 @@ class Font extends Model
         'features',
         'file_path',
         'font_file_path',
+        'category_id',
     ];
 
     protected $casts = [
@@ -41,5 +42,10 @@ class Font extends Model
     public function developers(): BelongsToMany
     {
         return $this->contributors()->wherePivot('role', 'developer');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

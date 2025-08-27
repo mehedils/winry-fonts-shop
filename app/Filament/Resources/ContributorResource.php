@@ -44,6 +44,8 @@ class ContributorResource extends Resource
                         Forms\Components\TextInput::make('facebook')->url()->maxLength(255),
                         Forms\Components\TextInput::make('instagram')->url()->maxLength(255),
                         Forms\Components\TextInput::make('twitter')->url()->maxLength(255),
+                        Forms\Components\TextInput::make('behance')->url()->maxLength(255),
+                        Forms\Components\TextInput::make('whatsapp')->maxLength(255),
                     ])->columns(2),
             ]);
     }
@@ -60,6 +62,8 @@ class ContributorResource extends Resource
                 Tables\Columns\TextColumn::make('facebook')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('instagram')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('twitter')->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('behance')->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('whatsapp')->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

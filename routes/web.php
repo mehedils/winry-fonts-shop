@@ -30,6 +30,73 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+// Developers route
+Route::get('/developers', function () {
+    $contributors = \App\Models\Contributor::with(['fonts'])
+        ->where('is_designer', true)
+        ->orWhere('is_developer', true)
+        ->get()
+        ->map(function ($contributor) {
+            $fonts = $contributor->fonts;
+            return (object) [
+                'id' => $contributor->id,
+                'name' => $contributor->name,
+                'photo_path' => $contributor->photo_path,
+                'website' => $contributor->website,
+                'facebook' => $contributor->facebook,
+                'instagram' => $contributor->instagram,
+                'twitter' => $contributor->twitter,
+                'behance' => $contributor->behance,
+                'whatsapp' => $contributor->whatsapp,
+                'is_designer' => $contributor->is_designer,
+                'is_developer' => $contributor->is_developer,
+                'fonts_count' => $fonts->count(),
+                'fonts' => $fonts->map(function ($font) {
+                    return (object) [
+                        'id' => $font->id,
+                        'name' => $font->name,
+                        'price' => $font->price,
+                        'type' => $font->price > 0 ? 'premium' : 'free',
+                    ];
+                }),
+            ];
+        });
+
+    return view('developers', compact('contributors'));
+})->name('developers');
+
+// Individual contributor profile route
+Route::get('/developers/{id}', function (int $id) {
+    $contributor = \App\Models\Contributor::with(['fonts'])->findOrFail($id);
+    
+    $contributorData = (object) [
+        'id' => $contributor->id,
+        'name' => $contributor->name,
+        'photo_path' => $contributor->photo_path,
+        'website' => $contributor->website,
+        'facebook' => $contributor->facebook,
+        'instagram' => $contributor->instagram,
+        'twitter' => $contributor->twitter,
+        'behance' => $contributor->behance,
+        'whatsapp' => $contributor->whatsapp,
+        'is_designer' => $contributor->is_designer,
+        'is_developer' => $contributor->is_developer,
+        'fonts_count' => $contributor->fonts->count(),
+        'fonts' => $contributor->fonts->map(function ($font) {
+            return (object) [
+                'id' => $font->id,
+                'name' => $font->name,
+                'price' => $font->price,
+                'type' => $font->price > 0 ? 'premium' : 'free',
+                'description' => $font->description,
+                'font_file_path' => $font->font_file_path,
+            ];
+        }),
+    ];
+
+    return view('developers.show', compact('contributorData'));
+})->name('developers.show');
+
 // Support/info routes
 Route::get('/help', function () {
     return view('help');
@@ -83,7 +150,16 @@ Route::get('/password/reset', function () {
 
 // Fonts routes
 Route::get('/fonts', function () {
-    $query = Font::with(['designers', 'developers']);
+    $query = Font::with(['designers', 'developers', 'category']);
+    
+    // Search functionality
+    if (request('q')) {
+        $searchTerm = request('q');
+        $query->where(function($q) use ($searchTerm) {
+            $q->where('name', 'like', '%' . $searchTerm . '%')
+              ->orWhere('description', 'like', '%' . $searchTerm . '%');
+        });
+    }
     
     // Filter by type
     if (request('type') === 'free') {
@@ -92,9 +168,9 @@ Route::get('/fonts', function () {
         $query->where('price', '>', 0);
     }
     
-    // Filter by category (placeholder for now)
+    // Filter by category
     if (request('category')) {
-        // Add category filtering when categories are implemented
+        $query->where('category_id', request('category'));
     }
     
     // Sort
@@ -128,15 +204,11 @@ Route::get('/fonts', function () {
             'downloads_count' => rand(100, 2000), // Placeholder
             'rating' => rand(3, 5), // Placeholder
             'font_file_path' => $font->font_file_path,
+            'category' => $font->category,
         ];
     });
     
-    $categories = [
-        (object) ['id' => 1, 'name' => 'হাতের লেখা'],
-        (object) ['id' => 2, 'name' => 'বোল্ড'],
-        (object) ['id' => 3, 'name' => 'পাতলা'],
-        (object) ['id' => 4, 'name' => 'ডেকোরেটিভ'],
-    ];
+    $categories = \App\Models\Category::where('is_active', true)->get();
     
     return view('fonts.index', compact('fonts', 'categories'));
 })->name('fonts.index');
@@ -146,20 +218,20 @@ Route::get('/fonts/category/{slug}', function (string $slug) {
 })->name('fonts.category');
 
 Route::get('/fonts/search', function () {
-    return redirect()->route('fonts.index');
+    return redirect()->route('fonts.index', ['q' => request('q')]);
 })->name('fonts.search');
 
 // Font details route
 Route::get('/fonts/{id}', function (int $id) {
-    $font = Font::with(['designers', 'developers'])->findOrFail($id);
+    $font = Font::with(['designers', 'developers', 'category'])->findOrFail($id);
     
     $fontData = (object) [
         'id' => $font->id,
         'slug' => 'font-' . $font->id,
         'display_name' => $font->name,
         'name' => $font->name,
-        'designer' => $font->designers->first()?->name ?? 'Unknown',
-        'developers' => $font->developers->pluck('name')->toArray(),
+        'designers' => $font->designers,
+        'developers' => $font->developers,
         'price' => $font->price,
         'type' => $font->price > 0 ? 'premium' : 'free',
         'weights' => [400],

@@ -10,22 +10,81 @@
                     <h1 class="text-4xl font-bold text-gray-900 bengali-text">{{ $fontData->display_name }}</h1>
                     <p class="text-gray-600 mt-2 bengali-text">{{ $fontData->description }}</p>
 
-                    <div class="mt-6 p-4 bg-gray-50 rounded-lg grid grid-cols-2 gap-4 text-sm text-gray-700">
-                        <div>
-                            <div class="font-semibold bengali-text">Designer</div>
-                            <div>{{ $fontData->designer }}</div>
+                    <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Designer Section -->
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-3 bengali-text">ডিজাইনার</h3>
+                                @if(isset($fontData->designers) && count($fontData->designers) > 0)
+                                    @foreach($fontData->designers as $designer)
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            @if($designer->photo_path)
+                                                <img src="{{ asset('storage/' . $designer->photo_path) }}" 
+                                                     alt="{{ $designer->name }}" 
+                                                     class="w-10 h-10 rounded-full object-cover">
+                                            @else
+                                                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                                    <i class="fas fa-user text-gray-400"></i>
+                                                </div>
+                                            @endif
+                                            <div class="flex-1">
+                                                <div class="font-medium text-gray-800">
+                                                    <a href="{{ route('developers.show', $designer->id) }}" 
+                                                       class="text-blue-600 hover:text-blue-800 transition-colors">
+                                                        {{ $designer->name }}
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="text-gray-500 bengali-text">ডিজাইনার তথ্য নেই</div>
+                                @endif
+                            </div>
+
+                            <!-- Developer Section -->
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-3 bengali-text">টাইপ ডেভেলপার</h3>
+                                @if(isset($fontData->developers) && count($fontData->developers) > 0)
+                                    @foreach($fontData->developers as $developer)
+                                        <div class="flex items-center space-x-3 mb-3">
+                                            @if($developer->photo_path)
+                                                <img src="{{ asset('storage/' . $developer->photo_path) }}" 
+                                                     alt="{{ $developer->name }}" 
+                                                     class="w-10 h-10 rounded-full object-cover">
+                                            @else
+                                                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                                    <i class="fas fa-user text-gray-400"></i>
+                                                </div>
+                                            @endif
+                                            <div class="flex-1">
+                                                <div class="font-medium text-gray-800">
+                                                    <a href="{{ route('developers.show', $developer->id) }}" 
+                                                       class="text-blue-600 hover:text-blue-800 transition-colors">
+                                                        {{ $developer->name }}
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="text-gray-500 bengali-text">ডেভেলপার তথ্য নেই</div>
+                                @endif
+                            </div>
                         </div>
-                        <div>
-                            <div class="font-semibold bengali-text">Type Developer</div>
-                            <div>{{ implode(', ', $fontData->developers) ?: 'Unknown' }}</div>
-                        </div>
-                        <div>
-                            <div class="font-semibold bengali-text">Font Styles</div>
-                            <div>{{ implode(', ', $fontData->styles) }}</div>
-                        </div>
-                        <div>
-                            <div class="font-semibold bengali-text">Weights</div>
-                            <div>{{ implode(', ', $fontData->weights) }}</div>
+
+                        <!-- Font Details -->
+                        <div class="grid md:grid-cols-2 gap-4 mt-6 pt-6 border-t">
+                            <div>
+                                <div class="font-semibold bengali-text">Font Styles</div>
+                                <div class="text-gray-700">{{ implode(', ', $fontData->styles) }}</div>
+                            </div>
+                            <div>
+                                <div class="font-semibold bengali-text">Weights</div>
+                                <div class="text-gray-700">{{ implode(', ', $fontData->weights) }}</div>
+                            </div>
                         </div>
                     </div>
 

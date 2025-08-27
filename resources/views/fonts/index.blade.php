@@ -24,53 +24,75 @@
         <div class="container mx-auto px-4">
             <h1 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">সব ফন্ট</h1>
             
-            <!-- Filters -->
+            <!-- Search and Filters -->
             <div class="bg-gray-50 rounded-lg p-6 mb-8">
-                <form action="{{ route('fonts.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 bengali-text">ফন্ট টাইপ</label>
-                        <select name="type" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="">সব</option>
-                            <option value="free" {{ request('type') === 'free' ? 'selected' : '' }}>ফ্রি</option>
-                            <option value="premium" {{ request('type') === 'premium' ? 'selected' : '' }}>প্রিমিয়াম</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 bengali-text">ক্যাটেগরি</label>
-                        <select name="category" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="">সব ক্যাটেগরি</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2 bengali-text">সাজান</label>
-                        <select name="sort" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>নতুনতম</option>
-                            <option value="popular" {{ request('sort') === 'popular' ? 'selected' : '' }}>জনপ্রিয়</option>
-                            <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>কম দাম</option>
-                            <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>বেশি দাম</option>
-                        </select>
-                    </div>
-                    
-                    <div class="flex items-end">
-                        <button type="submit" class="w-full btn-primary text-white px-4 py-2 rounded-lg">
-                            <i class="fas fa-search mr-2"></i>খুঁজুন
+                <form action="{{ route('fonts.index') }}" method="GET" class="space-y-4">
+                    <!-- Search Bar -->
+                    <div class="flex">
+                        <input type="text" name="q" value="{{ request('q') }}" placeholder="ফন্টের নাম বা বিবরণ লিখুন..." 
+                               class="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-r-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-search"></i>
                         </button>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2 bengali-text">ফন্ট টাইপ</label>
+                            <select name="type" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">সব</option>
+                                <option value="free" {{ request('type') === 'free' ? 'selected' : '' }}>ফ্রি</option>
+                                <option value="premium" {{ request('type') === 'premium' ? 'selected' : '' }}>প্রিমিয়াম</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2 bengali-text">ক্যাটেগরি</label>
+                            <select name="category" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">সব ক্যাটেগরি</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2 bengali-text">সাজান</label>
+                            <select name="sort" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>নতুনতম</option>
+                                <option value="popular" {{ request('sort') === 'popular' ? 'selected' : '' }}>জনপ্রিয়</option>
+                                <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>কম দাম</option>
+                                <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>বেশি দাম</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-end">
+                            <button type="submit" class="w-full btn-primary text-white px-4 py-2 rounded-lg">
+                                <i class="fas fa-filter mr-2"></i>ফিল্টার
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
             
             <!-- Results Count -->
             <div class="flex justify-between items-center mb-6">
-                <p class="text-gray-600 bengali-text">
-                    {{ $fonts->total() }}টি ফন্ট পাওয়া গেছে
-                </p>
+                <div>
+                    <p class="text-gray-600 bengali-text">
+                        {{ $fonts->total() }}টি ফন্ট পাওয়া গেছে
+                        @if(request('q'))
+                            <span class="text-blue-600">"{{ request('q') }}" এর জন্য</span>
+                        @endif
+                    </p>
+                    @if(request('q'))
+                        <a href="{{ route('fonts.index') }}" class="text-sm text-blue-600 hover:text-blue-800 bengali-text">
+                            <i class="fas fa-times mr-1"></i>সব ফন্ট দেখুন
+                        </a>
+                    @endif
+                </div>
                 <div class="flex items-center space-x-2">
                     <span class="text-sm text-gray-600 bengali-text">প্রতি পৃষ্ঠায়:</span>
                     <select id="per-page" class="border border-gray-300 rounded px-2 py-1 text-sm">

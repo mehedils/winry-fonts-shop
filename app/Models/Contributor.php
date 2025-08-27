@@ -16,6 +16,8 @@ class Contributor extends Model
         'facebook',
         'instagram',
         'twitter',
+        'behance',
+        'whatsapp',
     ];
 
     protected $casts = [

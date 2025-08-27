@@ -6,6 +6,9 @@
     </a>
     
     <h3 class="font-bold text-lg mb-2">{{ $font->display_name }}</h3>
+    @if(isset($font->category) && $font->category)
+        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">{{ $font->category->name }}</span>
+    @endif
     <p class="text-gray-600 mb-3 bengali-text">{{ $font->description }}</p>
     
     <div class="flex justify-between items-center">

@@ -5,19 +5,36 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Font;
 use App\Models\Contributor;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $categories = [
-            (object) ['name' => 'হাতের লেখা', 'slug' => 'handwriting', 'icon' => 'fas fa-pen-fancy'],
-            (object) ['name' => 'বোল্ড', 'slug' => 'bold', 'icon' => 'fas fa-bold'],
-            (object) ['name' => 'পাতলা', 'slug' => 'thin', 'icon' => 'fas fa-minus'],
-            (object) ['name' => 'ডেকোরেটিভ', 'slug' => 'decorative', 'icon' => 'fas fa-font'],
-        ];
+        $categories = Category::where('is_active', true)
+            ->take(4)
+            ->get()
+            ->map(function ($category) {
+                $icons = [
+                    'handwriting' => 'fas fa-pen-fancy',
+                    'bold' => 'fas fa-bold',
+                    'thin' => 'fas fa-minus',
+                    'decorative' => 'fas fa-font',
+                    'serif' => 'fas fa-font',
+                    'sans-serif' => 'fas fa-font',
+                    'headline' => 'fas fa-heading',
+                    'body-text' => 'fas fa-paragraph',
+                ];
+                
+                return (object) [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                    'icon' => $icons[$category->slug] ?? 'fas fa-font',
+                ];
+            });
 
-        $featuredFonts = Font::with(['designers', 'developers'])
+        $featuredFonts = Font::with(['designers', 'developers', 'category'])
             ->latest()
             ->take(4)
             ->get()
@@ -33,6 +50,7 @@ class HomeController extends Controller
                     'downloads_count' => rand(100, 2000), // Placeholder for now
                     'rating' => rand(3, 5), // Placeholder for now
                     'font_file_path' => $font->font_file_path,
+                    'category' => $font->category,
                 ];
             });
 
