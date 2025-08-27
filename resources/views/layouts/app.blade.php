@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'ফন্টবাজার - বাংলাদেশের প্রথম ফন্ট মার্কেটপ্লেস')</title>
+    <title>@yield('title', \App\Helpers\SettingsHelper::siteTitle())</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="@yield('description', \App\Helpers\SettingsHelper::siteDescription())">
+    <meta name="keywords" content="@yield('keywords', \App\Helpers\SettingsHelper::siteKeywords())">
+    
+    <!-- Favicon -->
+    @if(\App\Helpers\SettingsHelper::siteFavicon())
+        <link rel="icon" type="image/x-icon" href="{{ \App\Helpers\SettingsHelper::siteFavicon() }}">
+    @endif
     
     <!-- Styles -->
-     @vite('resources/css/app.css','resources/js/app.js')
+    @vite('resources/css/app.css','resources/js/app.js')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <!-- Custom Styles -->

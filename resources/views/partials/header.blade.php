@@ -3,8 +3,12 @@
     <nav class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
-                <i class="fas fa-font text-blue-600 text-2xl"></i>
-                <span class="text-2xl font-bold text-blue-600">ফন্টবাজার</span>
+                @if(\App\Helpers\SettingsHelper::siteLogo())
+                    <img src="{{ \App\Helpers\SettingsHelper::siteLogo() }}" alt="{{ \App\Helpers\SettingsHelper::siteTitle() }}" class="h-12 w-auto">
+                @else
+                    <i class="fas fa-font text-blue-600 text-2xl"></i>
+                    <span class="text-2xl font-bold text-blue-600">{{ \App\Helpers\SettingsHelper::siteTitle() }}</span>
+                @endif
             </div>
             
             <div class="hidden md:flex items-center space-x-8">
@@ -100,7 +104,7 @@
         document.getElementById('search-modal').classList.add('hidden');
     });
 
-    // Close modals when clicking outside
+    // Close search modal when clicking outside
     document.getElementById('search-modal')?.addEventListener('click', function(e) {
         if (e.target === this) {
             this.classList.add('hidden');
