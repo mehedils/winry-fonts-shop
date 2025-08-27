@@ -45,6 +45,15 @@ Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
+// Profile and orders routes (stubs)
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+
+Route::get('/orders', function () {
+    return view('orders.index', ['orders' => collect([])]);
+})->name('orders.index');
+
 // Auth routes (temporary stubs)
 Route::get('/login', function () {
     return view('auth.login');
@@ -85,6 +94,49 @@ Route::get('/fonts/category/{slug}', function (string $slug) {
 Route::get('/fonts/search', function () {
     return redirect()->route('fonts.index');
 })->name('fonts.search');
+
+// Font details route (placeholder data)
+Route::get('/fonts/{id}', function (int $id) {
+    $font = (object) [
+        'id' => $id,
+        'slug' => 'rushita-like',
+        'display_name' => 'রুশিতা-ধাঁচের ফন্ট',
+        'name' => 'RushitaLike',
+        'designer' => 'Md Rubel Ahmed',
+        'developers' => ['Md Rubel Ahmed', 'Robiul Hasan Shuvo'],
+        'price' => 0,
+        'type' => 'free',
+        'weights' => [400],
+        'styles' => ['Regular'],
+        'description' => 'একটি বোল্ড, এলিগ্যান্ট বাংলা হেডলাইন ফন্ট – আধুনিক কার্ভ ও ব্যালেন্সড প্রপোর্শন।',
+        'published_at' => '2025-08-16',
+    ];
+
+    $testerSamples = [
+        'ঢাকা স্মৃতিময় শহর',
+        'আমার সোনার বাংলা',
+        'বর্ষামুখর দিন শেষে',
+        'বাংলা টাইপোগ্রাফি সুন্দর',
+    ];
+
+    $basicGlyphs = [
+        'অ','আ','ই','ঈ','উ','ঊ','ঋ','এ','ঐ','ও','ঔ',
+        'ক','খ','গ','ঘ','ঙ','চ','ছ','জ','ঝ','ঞ',
+        'ট','ঠ','ড','ঢ','ণ','ত','থ','দ','ধ','ন',
+        'প','ফ','ব','ভ','ম','য','র','ল','শ','ষ','স','হ','ড়','ঢ়','য়','ৎ','ং','ঃ','ঁ',
+        '০','১','২','৩','৪','৫','৬','৭','৮','৯',
+        '।','–','—','‘','’','“','”'
+    ];
+
+    $marks = ['া','ি','ী','ু','ূ','ৃ','ে','ৈ','ো','ৌ','্'];
+
+    $complexGlyphs = [
+        'ক্ত','ক্ত্র','ক্ত্ব','গ্ন','ন্ধ','ন্ড','ন্ত্র','ন্ত্র্য','স্খ','স্ক্র','স্ত্র','শ্চ','শ্ব','শ্র','চ্ছ','জ্জ','জ্ঞ','ক্ষ','ক্ষ্ম','ক্ষ্ণ','হ্ম','হ্ন','হ্ল',
+        'ঞ্জ','ঞ্চ','ন্ট','ণ্ট','ণ্ড','ন্ড্র','ন্দ','ন্দ্র','ল্ক','ল্গ','ল্প','ম্প','ম্ভ','ম্ব','ম্ভ্র'
+    ];
+
+    return view('fonts.show', compact('font','testerSamples','basicGlyphs','marks','complexGlyphs'));
+})->name('fonts.show');
 
 // Cart routes (temporary stubs)
 Route::get('/cart', function () {

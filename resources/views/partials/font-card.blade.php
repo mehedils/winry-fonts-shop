@@ -1,9 +1,9 @@
 <div class="font-card bg-white rounded-lg p-6" data-type="{{ $font->type }}">
-    <div class="bg-gray-100 rounded-lg p-8 mb-4 text-center">
+    <a href="{{ route('fonts.show', $font->id) }}" class="block bg-gray-100 rounded-lg p-8 mb-4 text-center hover:bg-gray-200 transition">
         <p class="text-3xl text-gray-800 bengali-text" style="font-family: '{{ $font->name }}', sans-serif;">
             {{ $font->preview_text ?? 'আমার বাংলা' }}
         </p>
-    </div>
+    </a>
     
     <h3 class="font-bold text-lg mb-2">{{ $font->display_name }}</h3>
     <p class="text-gray-600 mb-3 bengali-text">{{ $font->description }}</p>
