@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Models\Font;
+use App\Models\Contributor;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -79,12 +81,64 @@ Route::get('/password/reset', function () {
     return view('auth.passwords.email');
 })->name('password.request');
 
-// Fonts routes (temporary stubs to satisfy view links)
+// Fonts routes
 Route::get('/fonts', function () {
-    return view('fonts.index', [
-        'fonts' => collect([]),
-        'categories' => collect([]),
-    ]);
+    $query = Font::with(['designers', 'developers']);
+    
+    // Filter by type
+    if (request('type') === 'free') {
+        $query->where('price', 0);
+    } elseif (request('type') === 'premium') {
+        $query->where('price', '>', 0);
+    }
+    
+    // Filter by category (placeholder for now)
+    if (request('category')) {
+        // Add category filtering when categories are implemented
+    }
+    
+    // Sort
+    switch (request('sort')) {
+        case 'popular':
+            $query->orderBy('id', 'desc'); // Placeholder for popularity
+            break;
+        case 'price_low':
+            $query->orderBy('price', 'asc');
+            break;
+        case 'price_high':
+            $query->orderBy('price', 'desc');
+            break;
+        default:
+            $query->latest();
+    }
+    
+    $perPage = request('per_page', 12);
+    $fonts = $query->paginate($perPage);
+    
+    // Transform fonts for view
+    $fonts->getCollection()->transform(function ($font) {
+        return (object) [
+            'id' => $font->id,
+            'type' => $font->price > 0 ? 'premium' : 'free',
+            'name' => $font->name,
+            'display_name' => $font->name,
+            'preview_text' => 'আমার বাংলা',
+            'description' => $font->description ?? 'বাংলা ফন্ট',
+            'price' => $font->price,
+            'downloads_count' => rand(100, 2000), // Placeholder
+            'rating' => rand(3, 5), // Placeholder
+            'font_file_path' => $font->font_file_path,
+        ];
+    });
+    
+    $categories = [
+        (object) ['id' => 1, 'name' => 'হাতের লেখা'],
+        (object) ['id' => 2, 'name' => 'বোল্ড'],
+        (object) ['id' => 3, 'name' => 'পাতলা'],
+        (object) ['id' => 4, 'name' => 'ডেকোরেটিভ'],
+    ];
+    
+    return view('fonts.index', compact('fonts', 'categories'));
 })->name('fonts.index');
 
 Route::get('/fonts/category/{slug}', function (string $slug) {
@@ -95,21 +149,24 @@ Route::get('/fonts/search', function () {
     return redirect()->route('fonts.index');
 })->name('fonts.search');
 
-// Font details route (placeholder data)
+// Font details route
 Route::get('/fonts/{id}', function (int $id) {
-    $font = (object) [
-        'id' => $id,
-        'slug' => 'rushita-like',
-        'display_name' => 'রুশিতা-ধাঁচের ফন্ট',
-        'name' => 'RushitaLike',
-        'designer' => 'Md Rubel Ahmed',
-        'developers' => ['Md Rubel Ahmed', 'Robiul Hasan Shuvo'],
-        'price' => 0,
-        'type' => 'free',
+    $font = Font::with(['designers', 'developers'])->findOrFail($id);
+    
+    $fontData = (object) [
+        'id' => $font->id,
+        'slug' => 'font-' . $font->id,
+        'display_name' => $font->name,
+        'name' => $font->name,
+        'designer' => $font->designers->first()?->name ?? 'Unknown',
+        'developers' => $font->developers->pluck('name')->toArray(),
+        'price' => $font->price,
+        'type' => $font->price > 0 ? 'premium' : 'free',
         'weights' => [400],
         'styles' => ['Regular'],
-        'description' => 'একটি বোল্ড, এলিগ্যান্ট বাংলা হেডলাইন ফন্ট – আধুনিক কার্ভ ও ব্যালেন্সড প্রপোর্শন।',
-        'published_at' => '2025-08-16',
+        'description' => $font->description ?? 'একটি বোল্ড, এলিগ্যান্ট বাংলা হেডলাইন ফন্ট – আধুনিক কার্ভ ও ব্যালেন্সড প্রপোর্শন।',
+        'published_at' => $font->published_date?->format('Y-m-d') ?? '2025-08-16',
+        'font_file_path' => $font->font_file_path,
     ];
 
     $testerSamples = [
@@ -135,7 +192,7 @@ Route::get('/fonts/{id}', function (int $id) {
         'ঞ্জ','ঞ্চ','ন্ট','ণ্ট','ণ্ড','ন্ড্র','ন্দ','ন্দ্র','ল্ক','ল্গ','ল্প','ম্প','ম্ভ','ম্ব','ম্ভ্র'
     ];
 
-    return view('fonts.show', compact('font','testerSamples','basicGlyphs','marks','complexGlyphs'));
+    return view('fonts.show', compact('fontData','testerSamples','basicGlyphs','marks','complexGlyphs'));
 })->name('fonts.show');
 
 // Cart routes (temporary stubs)

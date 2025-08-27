@@ -2,6 +2,23 @@
 
 @section('title', 'হোম - ফন্টবাজার')
 
+@push('styles')
+@if(isset($featuredFonts))
+<style>
+@foreach($featuredFonts as $f)
+    @if(!empty($f->font_file_path))
+    @font-face {
+        font-family: 'Font{{ $f->id }}';
+        src: url('{{ asset('storage/' . $f->font_file_path) }}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @endif
+@endforeach
+</style>
+@endif
+@endpush
+
 @section('content')
     <!-- Hero Section -->
     <section id="home" class="hero-section text-white py-20">
@@ -29,8 +46,8 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 bengali-text">ফন্ট ক্যাটেগরি</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach($categories as $category)
-                    <a href="{{ route('fonts.category', $category->slug) }}" class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
-                        <i class="{{ $category->icon }} text-3xl text-blue-600 mb-3"></i>
+                    <a href="{{ route('fonts.category', $category->slug ?? $category->id) }}" class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
+                        <i class="{{ $category->icon ?? 'fas fa-font' }} text-3xl text-blue-600 mb-3"></i>
                         <h3 class="font-semibold bengali-text">{{ $category->name }}</h3>
                     </a>
                 @endforeach
@@ -52,6 +69,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" id="fonts-grid">
                 @foreach($featuredFonts as $font)
+                    @php($font->family_css = !empty($font->font_file_path) ? 'Font'.$font->id : null)
                     @include('partials.font-card', ['font' => $font])
                 @endforeach
             </div>

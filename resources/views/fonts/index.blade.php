@@ -2,6 +2,23 @@
 
 @section('title', 'সব ফন্ট - ফন্টবাজার')
 
+@push('styles')
+@if(isset($fonts) && $fonts->count())
+<style>
+@foreach($fonts as $f)
+    @if(!empty($f->font_file_path))
+    @font-face {
+        font-family: 'Font{{ $f->id }}';
+        src: url('{{ asset('storage/' . $f->font_file_path) }}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @endif
+@endforeach
+</style>
+@endif
+@endpush
+
 @section('content')
     <div class="bg-white py-8">
         <div class="container mx-auto px-4">
@@ -68,6 +85,7 @@
             @if($fonts->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach($fonts as $font)
+                        @php($font->family_css = !empty($font->font_file_path) ? 'Font'.$font->id : null)
                         @include('partials.font-card', ['font' => $font])
                     @endforeach
                 </div>

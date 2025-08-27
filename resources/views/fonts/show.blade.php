@@ -1,31 +1,31 @@
 @extends('layouts.app')
 
-@section('title', $font->display_name . ' - ফন্টবাজার')
+@section('title', $fontData->display_name . ' - ফন্টবাজার')
 
 @section('content')
     <section class="py-10 bg-white">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="md:col-span-2">
-                    <h1 class="text-4xl font-bold text-gray-900 bengali-text">{{ $font->display_name }}</h1>
-                    <p class="text-gray-600 mt-2 bengali-text">{{ $font->description }}</p>
+                    <h1 class="text-4xl font-bold text-gray-900 bengali-text">{{ $fontData->display_name }}</h1>
+                    <p class="text-gray-600 mt-2 bengali-text">{{ $fontData->description }}</p>
 
                     <div class="mt-6 p-4 bg-gray-50 rounded-lg grid grid-cols-2 gap-4 text-sm text-gray-700">
                         <div>
                             <div class="font-semibold bengali-text">Designer</div>
-                            <div>{{ $font->designer }}</div>
+                            <div>{{ $fontData->designer }}</div>
                         </div>
                         <div>
                             <div class="font-semibold bengali-text">Type Developer</div>
-                            <div>{{ implode(', ', $font->developers) }}</div>
+                            <div>{{ implode(', ', $fontData->developers) ?: 'Unknown' }}</div>
                         </div>
                         <div>
                             <div class="font-semibold bengali-text">Font Styles</div>
-                            <div>{{ implode(', ', $font->styles) }}</div>
+                            <div>{{ implode(', ', $fontData->styles) }}</div>
                         </div>
                         <div>
                             <div class="font-semibold bengali-text">Weights</div>
-                            <div>{{ implode(', ', $font->weights) }}</div>
+                            <div>{{ implode(', ', $fontData->weights) }}</div>
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@
                             @endforeach
                         </div>
                         <div class="border rounded-lg p-6 bg-gray-50">
-                            <div id="tester-output" class="bengali-text" style="font-size: 48px; line-height: 1.4; font-weight: 400; font-style: normal; text-align: left; font-family: '{{ $font->name }}', 'Hind Siliguri', sans-serif;">
+                            <div id="tester-output" class="bengali-text" style="font-size: 48px; line-height: 1.4; font-weight: 400; font-style: normal; text-align: left; font-family: '{{ $fontData->name }}', 'Hind Siliguri', sans-serif;">
                                 ঢাকা স্মৃতিময় শহর আমার সোনার বাংলা বর্ষামুখর দিন শেষে
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                 <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-12 gap-2 text-center">
                                     @foreach($basicGlyphs as $g)
                                         <div class="border rounded bg-gray-50 aspect-square flex items-center justify-center p-2">
-                                            <div class="text-xl sm:text-2xl md:text-3xl bengali-text" style="font-family: '{{ $font->name }}', 'Hind Siliguri', sans-serif;">{{ $g }}</div>
+                                            <div class="text-xl sm:text-2xl md:text-3xl bengali-text" style="font-family: '{{ $fontData->name }}', 'Hind Siliguri', sans-serif;">{{ $g }}</div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-12 gap-2 text-center">
                                     @foreach($marks as $m)
                                         <div class="border rounded bg-gray-50 aspect-square flex items-center justify-center p-2">
-                                            <div class="text-xl sm:text-2xl md:text-3xl bengali-text" style="font-family: '{{ $font->name }}', 'Hind Siliguri', sans-serif;">{{ $m }}</div>
+                                            <div class="text-xl sm:text-2xl md:text-3xl bengali-text" style="font-family: '{{ $fontData->name }}', 'Hind Siliguri', sans-serif;">{{ $m }}</div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -101,7 +101,7 @@
                                 <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-8 gap-2 text-center">
                                     @foreach($complexGlyphs as $cg)
                                         <div class="border rounded bg-gray-50 aspect-square flex items-center justify-center p-2">
-                                            <div class="text-xl sm:text-2xl md:text-3xl leading-tight bengali-text" style="font-family: '{{ $font->name }}', 'Hind Siliguri', sans-serif;">{{ $cg }}</div>
+                                            <div class="text-xl sm:text-2xl md:text-3xl leading-tight bengali-text" style="font-family: '{{ $fontData->name }}', 'Hind Siliguri', sans-serif;">{{ $cg }}</div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -113,10 +113,10 @@
                 <aside class="md:col-span-1">
                     <div class="border rounded-lg p-6 sticky top-24">
                         <div class="text-3xl font-bold text-blue-600 mb-4">
-                            {{ $font->price > 0 ? '৳'.number_format($font->price) : 'ফ্রি' }}
+                            {{ $fontData->price > 0 ? '৳'.number_format($fontData->price) : 'ফ্রি' }}
                         </div>
-                        @if($font->type === 'free')
-                            <form action="{{ route('fonts.download', $font->id) }}" method="POST">
+                        @if($fontData->type === 'free')
+                            <form action="{{ route('fonts.download', $fontData->id) }}" method="POST">
                                 @csrf
                                 <button class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
                                     ডাউনলোড
@@ -125,7 +125,7 @@
                         @else
                             <form action="{{ route('cart.add') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="font_id" value="{{ $font->id }}">
+                                <input type="hidden" name="font_id" value="{{ $fontData->id }}">
                                 <button class="w-full btn-primary text-white px-4 py-2 rounded-lg">
                                     কার্টে যোগ করুন
                                 </button>
@@ -134,7 +134,7 @@
 
                         <div class="mt-6 text-sm text-gray-600 space-y-2">
                             <div class="bengali-text">প্রকাশিত: {{ 
-                                \Illuminate\Support\Carbon::parse($font->published_at)->translatedFormat('d F, Y') 
+                                \Illuminate\Support\Carbon::parse($fontData->published_at)->translatedFormat('d F, Y') 
                             }}</div>
                             <div class="bengali-text">লাইসেন্স: ব্যক্তিগত/বাণিজ্যিক</div>
                         </div>
@@ -144,6 +144,19 @@
         </div>
     </section>
 @endsection
+
+@push('styles')
+@if($fontData->font_file_path)
+<style>
+    @font-face {
+        font-family: '{{ $fontData->name }}';
+        src: url('{{ asset('storage/' . $fontData->font_file_path) }}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+</style>
+@endif
+@endpush
 
 @push('scripts')
 <script>

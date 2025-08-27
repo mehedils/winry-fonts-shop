@@ -1,6 +1,6 @@
 <div class="font-card bg-white rounded-lg p-6" data-type="{{ $font->type }}">
     <a href="{{ route('fonts.show', $font->id) }}" class="block bg-gray-100 rounded-lg p-8 mb-4 text-center hover:bg-gray-200 transition">
-        <p class="text-3xl text-gray-800 bengali-text" style="font-family: '{{ $font->name }}', sans-serif;">
+        <p class="text-3xl text-gray-800 bengali-text" style="font-family: '{{ $font->family_css ?? ('Font'.$font->id) }}', 'Hind Siliguri', sans-serif;">
             {{ $font->preview_text ?? 'আমার বাংলা' }}
         </p>
     </a>
