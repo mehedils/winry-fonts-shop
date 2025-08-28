@@ -3,14 +3,14 @@
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-                <div class="flex items-center space-x-2 mb-4">
+                <a href="{{ route('home') }}" class="flex items-center space-x-2 mb-4 hover:opacity-80 transition">
                     @if(\App\Helpers\SettingsHelper::siteLogo())
                         <img src="{{ \App\Helpers\SettingsHelper::siteLogo() }}" alt="{{ \App\Helpers\SettingsHelper::siteTitle() }}" class="h-16 w-auto">
                     @else
                         <i class="fas fa-font text-blue-400 text-2xl"></i>
                         <span class="text-2xl font-bold">{{ \App\Helpers\SettingsHelper::siteTitle() }}</span>
                     @endif
-                </div>
+                </a>
                 <p class="text-gray-400 bengali-text">{{ \App\Helpers\SettingsHelper::footerDescription() }}</p>
             </div>
             

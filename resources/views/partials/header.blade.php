@@ -2,20 +2,18 @@
 <header class="bg-white shadow-lg sticky top-0 z-50">
     <nav class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
+            <a href="{{ route('home') }}" class="flex items-center space-x-2 hover:opacity-80 transition">
                 @if(\App\Helpers\SettingsHelper::siteLogo())
                     <img src="{{ \App\Helpers\SettingsHelper::siteLogo() }}" alt="{{ \App\Helpers\SettingsHelper::siteTitle() }}" class="h-12 w-auto">
                 @else
                     <i class="fas fa-font text-blue-600 text-2xl"></i>
                     <span class="text-2xl font-bold text-blue-600">{{ \App\Helpers\SettingsHelper::siteTitle() }}</span>
                 @endif
-            </div>
+            </a>
             
             <div class="hidden md:flex items-center space-x-8">
-                <a href="{{ route('home') }}" class="text-gray-700 hover:text-blue-600 transition">হোম</a>
                 <a href="{{ route('fonts.index') }}" class="text-gray-700 hover:text-blue-600 transition">ফন্টসমূহ</a>
                 <a href="{{ route('developers') }}" class="text-gray-700 hover:text-blue-600 transition">ডেভেলপার</a>
-                <a href="{{ route('pricing') }}" class="text-gray-700 hover:text-blue-600 transition">মূল্য নির্ধারণ</a>
                 <a href="{{ route('about') }}" class="text-gray-700 hover:text-blue-600 transition">আমাদের সম্পর্কে</a>
             </div>
             

@@ -40,26 +40,13 @@
         </div>
     </section>
 
-    <!-- Font Categories -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 bengali-text">ফন্ট ক্যাটেগরি</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                @foreach($categories as $category)
-                    <a href="{{ route('fonts.index', ['category' => $category->id]) }}" class="text-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition cursor-pointer">
-                        <i class="{{ $category->icon ?? 'fas fa-font' }} text-3xl text-blue-600 mb-3"></i>
-                        <h3 class="font-semibold bengali-text">{{ $category->name }}</h3>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
+
 
     <!-- Featured Fonts -->
     <section id="fonts" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 bengali-text">বৈশিষ্ট্যপূর্ণ ফন্ট</h2>
+                <h2 class="text-3xl font-bold text-gray-800 bengali-text">আমাদের ফন্ট</h2>
                 <select class="border border-gray-300 rounded-lg px-4 py-2 bengali-text" id="font-filter">
                     <option value="">সব ফন্ট</option>
                     <option value="free">ফ্রি ফন্ট</option>
@@ -78,20 +65,6 @@
                 <a href="{{ route('fonts.index') }}" class="btn-primary text-white px-8 py-3 rounded-lg font-medium">
                     সব ফন্ট দেখুন
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Payment Methods -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h3 class="text-2xl font-bold text-center mb-8 bengali-text">পেমেন্ট পদ্ধতি</h3>
-            <div class="flex justify-center items-center space-x-8">
-                @foreach($paymentMethods as $method)
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <img src="{{ $method->logo }}" alt="{{ $method->name }}" class="h-10">
-                    </div>
-                @endforeach
             </div>
         </div>
     </section>
@@ -117,5 +90,7 @@
             }
         });
     });
+
+
 </script>
 @endpush

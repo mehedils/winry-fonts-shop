@@ -44,8 +44,8 @@ class ContributorResource extends Resource
                         Forms\Components\TextInput::make('facebook')->url()->maxLength(255),
                         Forms\Components\TextInput::make('instagram')->url()->maxLength(255),
                         Forms\Components\TextInput::make('twitter')->url()->maxLength(255),
-                        Forms\Components\TextInput::make('behance')->url()->maxLength(255),
-                        Forms\Components\TextInput::make('whatsapp')->maxLength(255),
+                        Forms\Components\TextInput::make('behance')->url()->maxLength(255)->prefixIcon('heroicon-o-link'),
+                        Forms\Components\TextInput::make('whatsapp')->maxLength(255)->prefixIcon('heroicon-o-phone'),
                     ])->columns(2),
             ]);
     }

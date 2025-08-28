@@ -26,9 +26,8 @@ Route::get('/pricing', function () {
 })->name('pricing');
 
 // About route
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/about', [App\Http\Controllers\AboutController::class, 'index'])->name('about');
+Route::post('/contact', [App\Http\Controllers\AboutController::class, 'contact'])->name('contact.submit');
 
 // Developers route
 Route::get('/developers', function () {
