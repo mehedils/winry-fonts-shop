@@ -41,9 +41,7 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
-        .hero-section {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
-        }
+
         .bengali-text {
             font-family: 'Hind Siliguri', sans-serif;
         }

@@ -175,26 +175,20 @@
                             {{ $fontData->price > 0 ? '৳'.number_format($fontData->price) : 'ফ্রি' }}
                         </div>
                         @if($fontData->type === 'free')
-                            <form action="{{ route('fonts.download', $fontData->id) }}" method="POST">
-                                @csrf
-                                <button class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
-                                    ডাউনলোড
-                                </button>
-                            </form>
+                            <a href="{{ route('fonts.download', $fontData->id) }}" class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 block text-center bengali-text">
+                                ডাউনলোড
+                            </a>
                         @else
-                            <form action="{{ route('cart.add') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="font_id" value="{{ $fontData->id }}">
-                                <button class="w-full btn-primary text-white px-4 py-2 rounded-lg">
-                                    কার্টে যোগ করুন
-                                </button>
-                            </form>
+                            <a href="{{ route('orders.create', $fontData->id) }}" class="w-full btn-primary text-white px-4 py-2 rounded-lg block text-center bengali-text">
+                                কিনুন
+                            </a>
                         @endif
 
                         <div class="mt-6 text-sm text-gray-600 space-y-2">
                             <div class="bengali-text">প্রকাশিত: {{ 
                                 \Illuminate\Support\Carbon::parse($fontData->published_at)->translatedFormat('d F, Y') 
                             }}</div>
+                            <div class="bengali-text">ডাউনলোড: {{ number_format($fontData->downloads_count ?? 0) }} বার</div>
                             <div class="bengali-text">লাইসেন্স: ব্যক্তিগত/বাণিজ্যিক</div>
                         </div>
                     </div>

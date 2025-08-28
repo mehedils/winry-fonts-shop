@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Font;
 use App\Models\Contributor;
 use App\Models\Category;
+use App\Models\Slider;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $sliders = Slider::active()->ordered()->get();
+
         $categories = Category::where('is_active', true)
             ->take(4)
             ->get()
@@ -47,8 +50,7 @@ class HomeController extends Controller
                     'preview_text' => 'আমার বাংলা',
                     'description' => $font->description ?? 'বাংলা ফন্ট',
                     'price' => $font->price,
-                    'downloads_count' => rand(100, 2000), // Placeholder for now
-                    'rating' => rand(3, 5), // Placeholder for now
+                    'downloads_count' => $font->downloads_count ?? 0, // Actual database value
                     'font_file_path' => $font->font_file_path,
                     'category' => $font->category,
                 ];
@@ -61,6 +63,6 @@ class HomeController extends Controller
             (object) ['name' => 'Card', 'logo' => 'https://via.placeholder.com/60x40/1e40af/ffffff?text=Card'],
         ];
 
-        return view('home', compact('categories', 'featuredFonts', 'paymentMethods'));
+        return view('home', compact('sliders', 'categories', 'featuredFonts', 'paymentMethods'));
     }
 }

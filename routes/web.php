@@ -175,7 +175,10 @@ Route::get('/fonts', function () {
     // Sort
     switch (request('sort')) {
         case 'popular':
-            $query->orderBy('id', 'desc'); // Placeholder for popularity
+            $query->orderBy('downloads_count', 'desc'); // Sort by actual download count
+            break;
+        case 'downloads':
+            $query->orderBy('downloads_count', 'desc');
             break;
         case 'price_low':
             $query->orderBy('price', 'asc');
@@ -200,8 +203,7 @@ Route::get('/fonts', function () {
             'preview_text' => 'আমার বাংলা',
             'description' => $font->description ?? 'বাংলা ফন্ট',
             'price' => $font->price,
-            'downloads_count' => rand(100, 2000), // Placeholder
-            'rating' => rand(3, 5), // Placeholder
+            'downloads_count' => $font->downloads_count ?? 0, // Actual database value
             'font_file_path' => $font->font_file_path,
             'category' => $font->category,
         ];
@@ -237,6 +239,7 @@ Route::get('/fonts/{id}', function (int $id) {
         'styles' => ['Regular'],
         'description' => $font->description ?? 'একটি বোল্ড, এলিগ্যান্ট বাংলা হেডলাইন ফন্ট – আধুনিক কার্ভ ও ব্যালেন্সড প্রপোর্শন।',
         'published_at' => $font->published_date?->format('Y-m-d') ?? '2025-08-16',
+        'downloads_count' => $font->downloads_count ?? 0, // Actual database value
         'font_file_path' => $font->font_file_path,
     ];
 
@@ -275,7 +278,10 @@ Route::post('/cart/add', function (\Illuminate\Http\Request $request) {
     return back()->with('status', 'Added to cart');
 })->name('cart.add');
 
-// Font download route (temporary stub)
-Route::post('/fonts/{id}/download', function ($id) {
-    return back()->with('status', 'Download started for font ID '.$id);
-})->name('fonts.download');
+// Order routes
+Route::get('/fonts/{font}/buy', [App\Http\Controllers\OrderController::class, 'create'])->name('orders.create');
+Route::post('/orders', [App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders/{order}/success', [App\Http\Controllers\OrderController::class, 'success'])->name('orders.success');
+
+// Font download route
+Route::get('/fonts/{font}/download', [App\Http\Controllers\OrderController::class, 'download'])->name('fonts.download');

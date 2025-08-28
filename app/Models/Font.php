@@ -19,12 +19,14 @@ class Font extends Model
         'file_path',
         'font_file_path',
         'category_id',
+        'downloads_count',
     ];
 
     protected $casts = [
         'published_date' => 'date',
         'is_variable' => 'boolean',
         'price' => 'decimal:2',
+        'downloads_count' => 'integer',
     ];
 
     public function contributors(): BelongsToMany
@@ -47,5 +49,13 @@ class Font extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Increment the download count for this font
+     */
+    public function incrementDownloadCount()
+    {
+        $this->increment('downloads_count');
     }
 }

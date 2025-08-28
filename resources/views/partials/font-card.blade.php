@@ -6,11 +6,6 @@
     </div>
     
     <h3 class="font-bold text-lg mb-2 text-gray-800">{{ $font->display_name }}</h3>
-    @if(isset($font->category) && $font->category)
-        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">{{ $font->category->name }}</span>
-    @endif
-    <p class="text-gray-600 mb-3 bengali-text">{{ $font->description }}</p>
-    
     <div class="flex justify-between items-center">
         @if($font->type === 'free')
             <span class="text-lg font-bold text-green-600">ফ্রি</span>

@@ -37,6 +37,12 @@ class FontResource extends Resource
                         Forms\Components\Textarea::make('description')->rows(4),
                         Forms\Components\DatePicker::make('published_date'),
                         Forms\Components\TextInput::make('price')->numeric()->prefix('৳')->default(0),
+                        Forms\Components\TextInput::make('downloads_count')
+                            ->label('Download Count')
+                            ->numeric()
+                            ->default(0)
+                            ->disabled()
+                            ->helperText('Automatically tracked when users download'),
                         Forms\Components\TextInput::make('glyphs')->numeric()->default(0),
                         Forms\Components\TextInput::make('supported_encodings')->helperText('Comma-separated e.g. Unicode, ASCII'),
                         Forms\Components\Toggle::make('is_variable')->label('Variable Font'),
@@ -104,6 +110,10 @@ class FontResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\BadgeColumn::make('price')->formatStateUsing(fn ($state) => $state > 0 ? '৳'.number_format($state, 2) : 'ফ্রি'),
+                Tables\Columns\TextColumn::make('downloads_count')
+                    ->label('Downloads')
+                    ->formatStateUsing(fn ($state) => number_format($state ?? 0))
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('glyphs')->sortable(),
                 Tables\Columns\TextColumn::make('published_date')->date()->sortable(),
                 Tables\Columns\IconColumn::make('is_variable')->boolean(),
