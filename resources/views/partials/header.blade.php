@@ -15,6 +15,7 @@
                 <a href="{{ route('fonts.index') }}" class="text-gray-700 hover:text-blue-600 transition">ফন্টসমূহ</a>
                 <a href="{{ route('developers') }}" class="text-gray-700 hover:text-blue-600 transition">ডেভেলপার</a>
                 <a href="{{ route('about') }}" class="text-gray-700 hover:text-blue-600 transition">আমাদের সম্পর্কে</a>
+                <a href="{{ route('contact') }}" class="text-gray-700 hover:text-blue-600 transition">যোগাযোগ</a>
             </div>
             
             <!-- Search Bar and Mobile Menu Toggle -->
@@ -43,6 +44,7 @@
                 <a href="{{ route('developers') }}" class="text-gray-700 hover:text-blue-600 transition">ডেভেলপার</a>
                 <a href="{{ route('pricing') }}" class="text-gray-700 hover:text-blue-600 transition">মূল্য নির্ধারণ</a>
                 <a href="{{ route('about') }}" class="text-gray-700 hover:text-blue-600 transition">আমাদের সম্পর্কে</a>
+                <a href="{{ route('contact') }}" class="text-gray-700 hover:text-blue-600 transition">যোগাযোগ</a>
                 
                 <!-- Mobile Search Bar -->
                 <form action="{{ route('fonts.index') }}" method="GET" class="flex mt-4">

@@ -102,7 +102,7 @@ Route::get('/help', function () {
 })->name('help');
 
 Route::get('/contact', function () {
-    return view('contact');
+    return redirect()->route('about', ['#contact']);
 })->name('contact');
 
 Route::get('/tutorials', function () {

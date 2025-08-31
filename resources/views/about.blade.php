@@ -154,7 +154,7 @@
             </div>
 
             <!-- Contact Form -->
-            <div class="max-w-4xl mx-auto">
+            <div id="contact" class="max-w-4xl mx-auto">
                 <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center bengali-text">যোগাযোগ করুন</h2>
                 <div class="bg-white rounded-xl shadow-lg p-8">
                     @if(session('success'))
@@ -215,3 +215,17 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    // Smooth scrolling for anchor links
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash === '#contact') {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+</script>
+@endpush

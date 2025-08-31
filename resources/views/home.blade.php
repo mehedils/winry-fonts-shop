@@ -25,22 +25,22 @@
 /* Hero Swiper Styles */
 .hero-swiper {
     width: 100% !important;
-    height: 100vh !important;
-    min-height: 600px !important;
+    height: 50vh !important;
+    min-height: 400px !important;
     position: relative !important;
 }
 
 .hero-swiper .swiper-slide {
     width: 100% !important;
-    height: 100vh !important;
-    min-height: 600px !important;
+    height: 50vh !important;
+    min-height: 400px !important;
     position: relative !important;
 }
 
 .hero-slide {
     width: 100% !important;
-    height: 100vh !important;
-    min-height: 600px !important;
+    height: 50vh !important;
+    min-height: 400px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -91,18 +91,18 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .hero-swiper {
-        height: 70vh !important;
-        min-height: 500px !important;
+        height: 50vh !important;
+        min-height: 350px !important;
     }
     
     .hero-swiper .swiper-slide {
-        height: 70vh !important;
-        min-height: 500px !important;
+        height: 50vh !important;
+        min-height: 350px !important;
     }
     
     .hero-slide {
-        height: 70vh !important;
-        min-height: 500px !important;
+        height: 50vh !important;
+        min-height: 350px !important;
     }
     
     .hero-swiper .swiper-button-next,
@@ -124,10 +124,10 @@
     @if($sliders->count() > 0)
         <!-- Debug: {{ $sliders->count() }} sliders found -->
         <!-- Hero Swiper Section -->
-        <div class="swiper hero-swiper" style="height: 100vh;">
+        <div class="swiper hero-swiper" style="height: 50vh;">
             <div class="swiper-wrapper">
                 @foreach($sliders as $slider)
-                    <div class="swiper-slide" style="height: 100vh;">
+                    <div class="swiper-slide" style="height: 50vh;">
                         <div style="
                             position: absolute;
                             top: 0;
