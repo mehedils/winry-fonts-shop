@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $contributorData->name . ' - প্রোফাইল - ফন্টবাজার')
+@section('title', $contributorData->name . ' - প্রোফাইল - ' . siteTitle())
 
 @push('styles')
 @if(isset($contributorData->fonts) && $contributorData->fonts->count())

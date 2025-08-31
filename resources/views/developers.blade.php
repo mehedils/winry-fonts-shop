@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'ডেভেলপার এবং ডিজাইনার - ফন্টবাজার')
+@section('title', 'ডেভেলপার এবং ডিজাইনার - ' . siteTitle())
 
 @section('content')
     <div class="bg-gray-50 py-8">

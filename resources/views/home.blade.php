@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'হোম - ফন্টবাজার')
+@section('title', 'হোম - ' . siteTitle())
 
 @push('styles')
 <!-- Swiper CSS -->

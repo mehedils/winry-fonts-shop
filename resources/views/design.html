@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ফন্টবাজার - বাংলাদেশের প্রথম ফন্ট মার্কেটপ্লেস</title>
+    <title>{{ siteTitle() }} - বাংলাদেশের প্রথম ফন্ট মার্কেটপ্লেস</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -42,7 +42,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                     <i class="fas fa-font text-blue-600 text-2xl"></i>
-                    <span class="text-2xl font-bold text-blue-600">ফন্টবাজার</span>
+                    <span class="text-2xl font-bold text-blue-600">{{ siteTitle() }}</span>
                 </div>
                 
                 <div class="hidden md:flex items-center space-x-8">
@@ -257,7 +257,7 @@
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
                         <i class="fas fa-font text-blue-400 text-2xl"></i>
-                        <span class="text-2xl font-bold">ফন্টবাজার</span>
+                        <span class="text-2xl font-bold">{{ siteTitle() }}</span>
                     </div>
                     <p class="text-gray-400 bengali-text">বাংলাদেশের প্রথম এবং সবচেয়ে বড় বাংলা ফন্ট মার্কেটপ্লেস</p>
                 </div>
@@ -297,7 +297,7 @@
             </div>
             
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-400 bengali-text">&copy; ২০২৪ ফন্টবাজার. সর্বস্বত্ব সংরক্ষিত.</p>
+                <p class="text-gray-400 bengali-text">&copy; ২০২৪ {{ siteTitle() }}. সর্বস্বত্ব সংরক্ষিত.</p>
             </div>
         </div>
     </footer>

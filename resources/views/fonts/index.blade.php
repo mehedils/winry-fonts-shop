@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'সব ফন্ট - ফন্টবাজার')
+@section('title', 'সব ফন্ট - ' . siteTitle())
 
 @push('styles')
 @if(isset($fonts) && $fonts->count())

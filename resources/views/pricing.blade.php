@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'মূল্য নির্ধারণ - ফন্টবাজার')
+@section('title', 'মূল্য নির্ধারণ - ' . siteTitle())
 
 @section('content')
     <!-- Pricing Section -->
