@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer class="bg-gray-800 text-white py-12">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 max-w-7xl">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
                 <a href="{{ route('home') }}" class="flex items-center space-x-2 mb-4 hover:opacity-80 transition">

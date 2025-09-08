@@ -22,8 +22,18 @@
     <!-- Custom Styles -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+        @font-face {
+            font-family: 'Bongo Lekhon';
+            src: url('{{ asset('fonts/Bongo-Lekhon.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        html {
+            font-size: 1.2rem;
+        }
         body {
-            font-family: 'Hind Siliguri', sans-serif;
+            font-family: 'Bongo Lekhon', 'Hind Siliguri', sans-serif;
         }
         .btn-primary {
             background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
@@ -43,7 +53,7 @@
         }
 
         .bengali-text {
-            font-family: 'Hind Siliguri', sans-serif;
+            font-family: 'Bongo Lekhon', 'Hind Siliguri', sans-serif;
         }
     </style>
     
