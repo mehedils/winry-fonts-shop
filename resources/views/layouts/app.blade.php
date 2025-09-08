@@ -14,9 +14,8 @@
     @if(\App\Helpers\SettingsHelper::siteFavicon())
         <link rel="icon" type="image/x-icon" href="{{ \App\Helpers\SettingsHelper::siteFavicon() }}">
     @endif
-    
-    <!-- Styles -->
     @vite('resources/css/app.css','resources/js/app.js')
+    <!-- Styles -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <!-- Custom Styles -->
@@ -24,7 +23,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
         @font-face {
             font-family: 'Bongo Lekhon';
-            src: url('{{ asset('fonts/Bongo-Lekhon.ttf') }}') format('truetype');
+            src: url('/font-files/Bongo-Lekhon.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;

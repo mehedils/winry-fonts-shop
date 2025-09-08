@@ -21,7 +21,7 @@
 
 @section('content')
     <div class="bg-white py-8">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 max-w-7xl">
             <h1 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">সব ফন্ট</h1>
             
             <!-- Search and Filters -->

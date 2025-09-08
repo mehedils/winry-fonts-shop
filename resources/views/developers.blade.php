@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="bg-gray-50 py-8">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 max-w-7xl">
             <h1 class="text-3xl font-bold text-center mb-8 text-gray-800 bengali-text">ডেভেলপার এবং ডিজাইনার</h1>
             
             <!-- Filter Tabs -->
@@ -110,7 +110,7 @@
                             
                             <!-- View Profile Button -->
                             <div class="mt-6">
-                                <a href="{{ route('developers.show', $contributor->id) }}" 
+                                <a href="{{ route('font-artist.show', $contributor->id) }}" 
                                    class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors bengali-text font-medium text-center block">
                                     প্রোফাইল দেখুন
                                 </a>

@@ -192,7 +192,7 @@
                                             @endif
                                             <div class="flex-1">
                                                 <div class="font-medium text-gray-800">
-                                                    <a href="{{ route('developers.show', $designer->id) }}" 
+                                                    <a href="{{ route('font-artist.show', $designer->id) }}" 
                                                        class="text-blue-600 hover:text-blue-800 transition-colors">
                                                         {{ $designer->name }}
                                                     </a>
@@ -225,7 +225,7 @@
                                             @endif
                                             <div class="flex-1">
                                                 <div class="font-medium text-gray-800">
-                                                    <a href="{{ route('developers.show', $developer->id) }}" 
+                                                    <a href="{{ route('font-artist.show', $developer->id) }}" 
                                                        class="text-blue-600 hover:text-blue-800 transition-colors">
                                                         {{ $developer->name }}
                                                     </a>

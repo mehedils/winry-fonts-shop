@@ -24,7 +24,7 @@
         <div class="container mx-auto px-4 max-w-6xl">
             <!-- Back Button -->
             <div class="mb-6">
-                <a href="{{ route('developers') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+                <a href="{{ route('font-artist') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
                     <i class="fas fa-arrow-left mr-2"></i>
                     <span class="bengali-text">সব ডেভেলপার দেখুন</span>
                 </a>

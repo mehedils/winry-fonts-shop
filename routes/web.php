@@ -30,7 +30,7 @@ Route::get('/about', [App\Http\Controllers\AboutController::class, 'index'])->na
 Route::post('/contact', [App\Http\Controllers\AboutController::class, 'contact'])->name('contact.submit');
 
 // Developers route
-Route::get('/developers', function () {
+Route::get('/font-artist', function () {
     $contributors = \App\Models\Contributor::with(['fonts'])
         ->where('is_designer', true)
         ->orWhere('is_developer', true)
@@ -62,10 +62,10 @@ Route::get('/developers', function () {
         });
 
     return view('developers', compact('contributors'));
-})->name('developers');
+})->name('font-artist');
 
 // Individual contributor profile route
-Route::get('/developers/{id}', function (int $id) {
+Route::get('/font-artist/{id}', function (int $id) {
     $contributor = \App\Models\Contributor::with(['fonts'])->findOrFail($id);
     
     $contributorData = (object) [
@@ -94,7 +94,7 @@ Route::get('/developers/{id}', function (int $id) {
     ];
 
     return view('developers.show', compact('contributorData'));
-})->name('developers.show');
+})->name('font-artist.show');
 
 // Support/info routes
 Route::get('/help', function () {
@@ -175,7 +175,7 @@ Route::get('/fonts', function () {
     // Sort
     switch (request('sort')) {
         case 'popular':
-            $query->orderBy('downloads_count', 'desc'); // Sort by actual download count
+            $query->orderBy('downloads_count', 'desc');
             break;
         case 'downloads':
             $query->orderBy('downloads_count', 'desc');
@@ -203,7 +203,7 @@ Route::get('/fonts', function () {
             'preview_text' => 'আমার বাংলা',
             'description' => $font->description ?? 'বাংলা ফন্ট',
             'price' => $font->price,
-            'downloads_count' => $font->downloads_count ?? 0, // Actual database value
+            'downloads_count' => $font->downloads_count ?? 0,
             'font_file_path' => $font->font_file_path,
             'category' => $font->category,
         ];

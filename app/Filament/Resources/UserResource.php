@@ -10,8 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
@@ -32,17 +30,17 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255),
-                        
+
                         Forms\Components\TextInput::make('email')
                             ->email()
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255),
-                        
+
                         Forms\Components\TextInput::make('phone')
                             ->tel()
                             ->maxLength(20),
-                        
+
                         Forms\Components\Textarea::make('bio')
                             ->rows(3)
                             ->maxLength(500)
@@ -71,17 +69,17 @@ class UserResource extends Resource
                             ->required()
                             ->default('admin')
                             ->helperText('Super Admin has full access, Admin has limited access'),
-                        
+
                         Forms\Components\Toggle::make('is_active')
                             ->label('Active')
                             ->default(true)
                             ->helperText('Inactive users cannot login'),
-                        
+
                         Forms\Components\TextInput::make('password')
                             ->password()
-                            ->dehydrateStateUsing(fn ($state) => filled($state) ? bcrypt($state) : null)
-                            ->dehydrated(fn ($state) => filled($state))
-                            ->required(fn (string $context): bool => $context === 'create')
+                            ->dehydrateStateUsing(fn($state) => filled($state) ? bcrypt($state) : null)
+                            ->dehydrated(fn($state) => filled($state))
+                            ->required(fn(string $context): bool => $context === 'create')
                             ->minLength(8)
                             ->helperText('Leave empty to keep current password'),
                     ])->columns(2),
@@ -91,7 +89,7 @@ class UserResource extends Resource
                         Forms\Components\DateTimePicker::make('last_login_at')
                             ->label('Last Login')
                             ->disabled(),
-                        
+
                         Forms\Components\DateTimePicker::make('email_verified_at')
                             ->label('Email Verified At')
                             ->disabled(),
@@ -108,47 +106,47 @@ class UserResource extends Resource
                 Tables\Columns\ImageColumn::make('avatar')
                     ->label('')
                     ->circular()
-                    ->defaultImageUrl(fn ($record) => $record->avatar_url)
+                    ->defaultImageUrl(fn($record) => $record->avatar_url)
                     ->size(40),
-                
+
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                
+
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->sortable()
                     ->copyable()
                     ->icon('heroicon-m-envelope'),
-                
+
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable()
                     ->toggleable()
                     ->icon('heroicon-m-phone'),
-                
+
                 Tables\Columns\BadgeColumn::make('role')
                     ->colors([
                         'success' => 'super_admin',
                         'primary' => 'admin',
                     ])
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
                         'super_admin' => 'Super Admin',
                         'admin' => 'Admin',
                         default => ucfirst($state),
                     }),
-                
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Status')
                     ->boolean()
                     ->sortable(),
-                
+
                 Tables\Columns\TextColumn::make('last_login_at')
                     ->label('Last Login')
                     ->dateTime()
                     ->sortable()
                     ->toggleable()
                     ->since(),
-                
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Joined')
                     ->dateTime()
@@ -161,7 +159,7 @@ class UserResource extends Resource
                         'admin' => 'Admin',
                         'super_admin' => 'Super Admin',
                     ]),
-                
+
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label('Status')
                     ->placeholder('All Admins')
@@ -173,17 +171,17 @@ class UserResource extends Resource
                     ->label('Login As')
                     ->icon('heroicon-o-user-circle')
                     ->color('warning')
-                    ->visible(fn ($record) => auth()->user()->isSuperAdmin() && $record->id !== auth()->id())
+                    ->visible(fn($record) => auth()->user()->isSuperAdmin() && $record->id !== auth()->id())
                     ->action(function ($record) {
                         auth()->login($record);
                         return redirect('/admin');
                     })
                     ->requiresConfirmation(),
-                
+
                 Tables\Actions\EditAction::make(),
-                
+
                 Tables\Actions\DeleteAction::make()
-                    ->visible(fn ($record) => $record->id !== auth()->id()),
+                    ->visible(fn($record) => $record->id !== auth()->id()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
