@@ -7,6 +7,8 @@ use App\Models\Font;
 use App\Models\Contributor;
 use App\Models\Category;
 use App\Models\Slider;
+use App\Models\CompanyLogo;
+use App\Models\Service;
 
 class HomeController extends Controller
 {
@@ -60,6 +62,9 @@ class HomeController extends Controller
             });
 
 
-        return view('home', compact('sliders', 'categories', 'featuredFonts'));
+        $companyLogos = CompanyLogo::active()->ordered()->get();
+        $services = Service::active()->ordered()->get();
+
+        return view('home', compact('sliders', 'categories', 'featuredFonts', 'companyLogos', 'services'));
     }
 }

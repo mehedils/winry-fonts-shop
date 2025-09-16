@@ -117,6 +117,45 @@
         font-size: 14px;
     }
 }
+
+/* Company Logos Swiper Styles */
+.company-logos-swiper {
+    width: 100%;
+    height: 120px;
+    padding: 20px 0;
+}
+
+.company-logos-swiper .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.company-logos-swiper .swiper-slide img {
+    max-height: 64px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+}
+
+.company-logos-swiper .swiper-slide:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* Mobile responsive for logos */
+@media (max-width: 768px) {
+    .company-logos-swiper {
+        height: 100px;
+        padding: 15px 0;
+    }
+    
+    .company-logos-swiper .swiper-slide img {
+        max-height: 48px;
+    }
+}
 </style>
 @endpush
 
@@ -152,6 +191,41 @@
     </section>
 
     @include('home.services')
+    
+    <!-- Company Logos Carousel -->
+    @if($companyLogos->count() > 0)
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 bengali-text">আমাদের পার্টনার</h2>
+                <p class="text-gray-600 mt-4 bengali-text">যারা আমাদের সাথে কাজ করে</p>
+            </div>
+            
+            <div class="swiper company-logos-swiper w-full">
+                <div class="swiper-wrapper">
+                    @foreach($companyLogos as $logo)
+                        <div class="swiper-slide">
+                            <div class="flex items-center justify-center h-24 p-4">
+                                @if($logo->website_url)
+                                    <a href="{{ $logo->website_url }}" target="_blank" rel="noopener" 
+                                       class="block transition-transform hover:scale-110 duration-300">
+                                        <img src="{{ asset('storage/' . $logo->logo_path) }}" 
+                                             alt="{{ $logo->name }}" 
+                                             class="max-h-16 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300">
+                                    </a>
+                                @else
+                                    <img src="{{ asset('storage/' . $logo->logo_path) }}" 
+                                         alt="{{ $logo->name }}" 
+                                         class="max-h-16 w-auto object-contain filter grayscale">
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
 @endsection
 
 @push('scripts')
@@ -220,6 +294,39 @@
                 )
             );
         }, 1000);
+        
+        // Initialize Company Logos Swiper
+        const companyLogosSwiper = new Swiper('.company-logos-swiper', {
+            slidesPerView: 2,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 2,
+                    spaceBetween: 16,
+                },
+                640: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 28,
+                },
+                1280: {
+                    slidesPerView: 4,
+                    spaceBetween: 32,
+                }
+            }
+        });
     });
 
     // Font filter functionality

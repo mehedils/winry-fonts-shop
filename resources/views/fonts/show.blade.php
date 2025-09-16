@@ -32,38 +32,36 @@
 
                     @if($fontData->price > 0)
                         <!-- Premium Font Preview Slider -->
-                        <div class="mt-6 sm:mt-8 bg-white border rounded-lg p-4 sm:p-6">
+                        <div class="mt-6 sm:mt-8 bg-white border rounded-lg p-4 sm:p-6 w-full max-w-full overflow-hidden">
                             <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 bengali-text flex items-center gap-2">
                                 <i class="fas fa-images text-blue-600 text-lg sm:text-xl"></i>
                                 Font Style Preview
                             </h2>
-                            <div class="bg-gray-50 rounded-lg p-2 sm:p-4 w-full overflow-hidden">
+                            <div class="bg-gray-50 rounded-lg p-2 sm:p-4 w-full max-w-full overflow-hidden">
                                 @if(!empty($fontData->slider_images) && count($fontData->slider_images) > 1)
                                     <!-- Swiper Container -->
-                                    <div class="swiper font-preview-swiper w-full max-w-full">
+                                    <div class="swiper font-preview-swiper w-full max-w-full h-48 sm:h-64 md:h-80 lg:h-96 xl:h-[500px] relative overflow-hidden">
                                         <div class="swiper-wrapper">
                                             @foreach($fontData->slider_images as $image)
-                                                <div class="swiper-slide">
-                                                    <div class="text-center w-full h-full flex items-center justify-center">
-                                                        <img src="{{ asset('storage/' . $image) }}" 
-                                                             alt="{{ $fontData->display_name }} Style {{ $loop->iteration }}" 
-                                                             class="w-full h-full object-contain rounded-lg shadow-lg">
-                                                    </div>
+                                                <div class="swiper-slide flex items-center justify-center p-1 sm:p-2 md:p-4 w-full max-w-full">
+                                                    <img src="{{ asset('storage/' . $image) }}" 
+                                                         alt="{{ $fontData->display_name }} Style {{ $loop->iteration }}" 
+                                                         class="w-full max-w-full h-full object-cover rounded-lg shadow-lg">
                                                 </div>
                                             @endforeach
                                         </div>
                                         <!-- Navigation buttons -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
+                                        <div class="swiper-button-next !w-8 !h-8 sm:!w-10 sm:!h-10 md:!w-12 md:!h-12 !bg-white/90 !text-blue-600 !rounded-full !shadow-lg hover:!bg-white hover:!scale-110 !transition-all"></div>
+                                        <div class="swiper-button-prev !w-8 !h-8 sm:!w-10 sm:!h-10 md:!w-12 md:!h-12 !bg-white/90 !text-blue-600 !rounded-full !shadow-lg hover:!bg-white hover:!scale-110 !transition-all"></div>
                                         <!-- Pagination -->
-                                        <div class="swiper-pagination"></div>
+                                        <div class="swiper-pagination !bottom-2 sm:!bottom-4"></div>
                                     </div>
                                 @elseif(!empty($fontData->slider_images) && count($fontData->slider_images) == 1)
                                     <!-- Single image fallback -->
                                     <div class="text-center w-full max-w-full overflow-hidden">
                                         <img src="{{ asset('storage/' . $fontData->slider_images[0]) }}" 
                                              alt="{{ $fontData->display_name }} Preview" 
-                                             class="w-full max-w-full max-h-96 object-contain mx-auto rounded-lg shadow-lg">
+                                             class="w-full max-w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover mx-auto rounded-lg shadow-lg">
                                     </div>
                                 @else
                                     <!-- No slider images yet - placeholder -->
@@ -342,13 +340,10 @@
 
 @if($fontData->price > 0)
 <style>
-/* Font Preview Swiper Styles */
+/* Minimal Swiper customization - most styling is now handled by Tailwind */
 .font-preview-swiper {
     width: 100% !important;
     max-width: 100% !important;
-    height: 500px;
-    margin: 0 auto;
-    padding: 0 20px;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -359,69 +354,16 @@
 }
 
 .font-preview-swiper .swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    padding: 20px;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box;
-}
-
-.font-preview-swiper .swiper-slide img {
-    width: 100% !important;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
-    max-width: 100% !important;
-    max-height: 100%;
-    box-sizing: border-box;
-}
-
-.font-preview-swiper .swiper-slide img:hover {
-    transform: scale(1.02);
-}
-
-/* Navigation buttons */
-.font-preview-swiper .swiper-button-next,
-.font-preview-swiper .swiper-button-prev {
-    color: #3b82f6;
-    background: rgba(255, 255, 255, 0.95);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.font-preview-swiper .swiper-button-next:hover,
-.font-preview-swiper .swiper-button-prev:hover {
-    background: white;
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.font-preview-swiper .swiper-button-next:after,
-.font-preview-swiper .swiper-button-prev:after {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Pagination */
-.font-preview-swiper .swiper-pagination {
-    bottom: 20px;
 }
 
 .font-preview-swiper .swiper-pagination-bullet {
     background: #3b82f6;
     opacity: 0.6;
-    width: 12px;
-    height: 12px;
-    margin: 0 6px;
+    width: 10px;
+    height: 10px;
     transition: all 0.3s ease;
 }
 
@@ -431,160 +373,57 @@
     background: #1d4ed8;
 }
 
-/* Tablet responsive */
-@media (max-width: 1024px) {
-    .font-preview-swiper {
-        height: 450px;
-        padding: 0 15px;
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow: hidden;
-        box-sizing: border-box;
-    }
-    
-    .font-preview-swiper .swiper-wrapper {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    .font-preview-swiper .swiper-slide {
-        padding: 15px;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100%;
-        box-sizing: border-box;
-    }
-    
-    .font-preview-swiper .swiper-slide img {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100%;
-        object-fit: contain;
-        box-sizing: border-box;
-    }
-    
-    .font-preview-swiper .swiper-button-next,
-    .font-preview-swiper .swiper-button-prev {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .font-preview-swiper .swiper-button-next:after,
-    .font-preview-swiper .swiper-button-prev:after {
-        font-size: 16px;
-    }
+.font-preview-swiper .swiper-button-next:after,
+.font-preview-swiper .swiper-button-prev:after {
+    font-size: 12px;
+    font-weight: bold;
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-    .font-preview-swiper {
-        height: 350px;
-        padding: 0 5px;
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow: hidden;
-        box-sizing: border-box;
-    }
-    
-    .font-preview-swiper .swiper-wrapper {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    .font-preview-swiper .swiper-slide {
-        padding: 5px;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100%;
-        box-sizing: border-box;
-    }
-    
-    .font-preview-swiper .swiper-slide img {
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100%;
-        object-fit: contain;
-        box-sizing: border-box;
-    }
-    
-    .font-preview-swiper .swiper-button-next,
-    .font-preview-swiper .swiper-button-prev {
-        width: 40px;
-        height: 40px;
+/* Responsive adjustments */
+@media (min-width: 640px) {
+    .font-preview-swiper .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
     }
     
     .font-preview-swiper .swiper-button-next:after,
     .font-preview-swiper .swiper-button-prev:after {
         font-size: 14px;
     }
-    
-    .font-preview-swiper .swiper-pagination {
-        bottom: 15px;
-    }
-    
-    .font-preview-swiper .swiper-pagination-bullet {
-        width: 10px;
-        height: 10px;
-        margin: 0 4px;
+}
+
+@media (min-width: 768px) {
+    .font-preview-swiper .swiper-button-next:after,
+    .font-preview-swiper .swiper-button-prev:after {
+        font-size: 16px;
     }
 }
 
-/* Small mobile responsive */
-@media (max-width: 480px) {
-    .font-preview-swiper {
-        height: 280px;
-        padding: 0 2px;
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow: hidden;
-        box-sizing: border-box;
+/* Ensure proper positioning on mobile */
+.font-preview-swiper .swiper-button-next,
+.font-preview-swiper .swiper-button-prev {
+    margin-top: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.font-preview-swiper .swiper-button-next {
+    right: 8px;
+}
+
+.font-preview-swiper .swiper-button-prev {
+    left: 8px;
+}
+
+@media (min-width: 640px) {
+    .font-preview-swiper .swiper-button-next {
+        right: 12px;
     }
     
-    .font-preview-swiper .swiper-wrapper {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    .font-preview-swiper .swiper-slide {
-        padding: 2px;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100%;
-        box-sizing: border-box;
-    }
-    
-    .font-preview-swiper .swiper-slide img {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100%;
-        object-fit: contain;
-        border-radius: 6px;
-        box-sizing: border-box;
-    }
-    
-    .font-preview-swiper .swiper-button-next,
     .font-preview-swiper .swiper-button-prev {
-        width: 35px;
-        height: 35px;
+        left: 12px;
     }
-    
-    .font-preview-swiper .swiper-button-next:after,
-    .font-preview-swiper .swiper-button-prev:after {
-        font-size: 12px;
-    }
-    
-    .font-preview-swiper .swiper-pagination {
-        bottom: 10px;
-    }
-    
-    .font-preview-swiper .swiper-pagination-bullet {
-        width: 8px;
-        height: 8px;
-        margin: 0 3px;
-    }
-    }
+}
 </style>
 @endif
 @endpush
