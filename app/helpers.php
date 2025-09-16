@@ -121,3 +121,13 @@ if (!function_exists('footerDescription')) {
         return SettingsHelper::footerDescription();
     }
 }
+
+if (!function_exists('aboutUsContent')) {
+    /**
+     * Get the About Us rich text content
+     */
+    function aboutUsContent(): ?string
+    {
+        return SettingsHelper::aboutUsContent();
+    }
+}

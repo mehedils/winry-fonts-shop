@@ -119,4 +119,12 @@ class SettingsHelper
     {
         return self::get('footer_description', 'Your trusted source for high-quality Bangla fonts and typography solutions.');
     }
+
+    /**
+     * Get About Us page rich text content
+     */
+    public static function aboutUsContent(): ?string
+    {
+        return self::get('about_us_content');
+    }
 }

@@ -9,3 +9,23 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* Match About fallback typography for admin content */
+.about-content {
+    line-height: 1.75;
+}
+.about-content h2 {
+    font-size: 1.875rem; /* text-3xl */
+    line-height: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem; /* mb-8 */
+}
+.about-content p {
+    font-size: 1.125rem; /* text-lg */
+    color: rgb(55 65 81); /* text-gray-700 */
+    line-height: 1.75rem;
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+.about-content strong {
+    font-weight: 700;
+}

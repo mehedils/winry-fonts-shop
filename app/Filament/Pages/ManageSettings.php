@@ -7,6 +7,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Log;
 
 class ManageSettings extends Page
 {
@@ -41,6 +42,7 @@ class ManageSettings extends Page
     public ?string $social_behance = '';
     public ?string $footer_copyright = '';
     public ?string $footer_description = '';
+    public ?string $about_us_content = '';
 
     public function mount(): void
     {
@@ -81,13 +83,14 @@ class ManageSettings extends Page
                 'social_behance' => $settings->get('social_behance')?->value ?? '',
                 'footer_copyright' => $settings->get('footer_copyright')?->value ?? '',
                 'footer_description' => $settings->get('footer_description')?->value ?? '',
+                'about_us_content' => $settings->get('about_us_content')?->value ?? '',
             ];
             
             // Fill the form with existing data
             $this->form->fill($formData);
             
         } catch (\Exception $e) {
-            \Log::error('Error in populateForm: ' . $e->getMessage());
+            Log::error('Error in populateForm: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -232,6 +235,22 @@ class ManageSettings extends Page
                             ->maxLength(300),
                     ])
                     ->columns(2),
+
+                // About Page
+                Forms\Components\Section::make('About Page')
+                    ->icon('heroicon-o-information-circle')
+                    ->description('Manage the content for the “About Us” page')
+                    ->schema([
+                        Forms\Components\RichEditor::make('about_us_content')
+                            ->label('About Us Content')
+                            ->placeholder('Write your About Us content here...')
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsDirectory('about')
+                            ->toolbarButtons([
+                                'bold', 'italic', 'underline', 'strike', 'bulletList', 'orderedList', 'blockquote', 'link', 'h2', 'h3', 'codeBlock', 'redo', 'undo'
+                            ])
+                            ->columnSpanFull(),
+                    ]),
             ]);
     }
 
@@ -265,6 +284,7 @@ class ManageSettings extends Page
                 'social_behance' => $data['social_behance'] ?? '',
                 'footer_copyright' => $data['footer_copyright'] ?? '',
                 'footer_description' => $data['footer_description'] ?? '',
+                'about_us_content' => $data['about_us_content'] ?? '',
             ];
 
             foreach ($settingsData as $key => $value) {
@@ -285,7 +305,7 @@ class ManageSettings extends Page
                 ->send();
 
         } catch (\Exception $e) {
-            \Log::error('Error in saveSettings: ' . $e->getMessage(), [
+            Log::error('Error in saveSettings: ' . $e->getMessage(), [
                 'trace' => $e->getTraceAsString()
             ]);
             
@@ -326,7 +346,7 @@ class ManageSettings extends Page
             };
             return $type;
         } catch (\Exception $e) {
-            \Log::error("Error in getFieldType for {$key}: " . $e->getMessage());
+            Log::error("Error in getFieldType for {$key}: " . $e->getMessage());
             return 'text';
         }
     }
@@ -343,7 +363,7 @@ class ManageSettings extends Page
             };
             return $group;
         } catch (\Exception $e) {
-            \Log::error("Error in getFieldGroup for {$key}: " . $e->getMessage());
+            Log::error("Error in getFieldGroup for {$key}: " . $e->getMessage());
             return 'general';
         }
     }
@@ -369,11 +389,12 @@ class ManageSettings extends Page
                 'social_github' => 'GitHub',
                 'footer_copyright' => 'Copyright Text',
                 'footer_description' => 'Footer Description',
+                'about_us_content' => 'About Us Content',
                 default => ucfirst(str_replace('_', ' ', $key)),
             };
             return $label;
         } catch (\Exception $e) {
-            \Log::error("Error in getFieldLabel for {$key}: " . $e->getMessage());
+            Log::error("Error in getFieldLabel for {$key}: " . $e->getMessage());
             return ucfirst(str_replace('_', ' ', $key));
         }
     }

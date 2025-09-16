@@ -14,7 +14,7 @@
     @if(\App\Helpers\SettingsHelper::siteFavicon())
         <link rel="icon" type="image/x-icon" href="{{ \App\Helpers\SettingsHelper::siteFavicon() }}">
     @endif
-    @vite('resources/css/app.css','resources/js/app.js')
+    @vite(['resources/css/app.css','resources/js/app.js'])
     <!-- Styles -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     

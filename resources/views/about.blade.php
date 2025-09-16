@@ -15,72 +15,80 @@
         </div>
 
         <div class="container mx-auto px-4 py-16">
-            <!-- Origin Story -->
-            <div class="max-w-4xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের উৎপত্তির গল্প</h2>
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <p class="text-lg text-gray-700 leading-relaxed mb-6 bengali-text">
-                        {{ siteTitle() }} (পূর্বে <strong>বাংলা ফন্ট</strong>) ২০২৩ সালে জন্মগ্রহণ করে, যখন বিশ্ব ডিজিটাল বিপ্লবের মধ্য দিয়ে যাচ্ছিল। 
-                        যা শুরু হয়েছিল গ্রাফিক ডিজাইনের প্রতি কৌতূহল থেকে, তা পরিণত হয়েছিল টাইপোগ্রাফির প্রতি গভীর ভালোবাসায়। 
-                        শীঘ্রই, {{ siteTitle() }} বাংলা ফন্টের জন্য একটি দূরদর্শী টাইপ ফাউন্ড্রি হিসেবে আবির্ভূত হয়।
-                    </p>
-                    <p class="text-lg text-gray-700 leading-relaxed bengali-text">
-                        বিনয়ী শুরু থেকে, আমরা প্রতিভাবান ডিজাইনারদের নেটওয়ার্কের সাথে সহযোগিতা করে আমাদের প্রথম টাইপফেস তৈরি করি। 
-                        এটি ছিল আমাদের যাত্রার শুরু, একটি পথ যা আবেগ, অনুসন্ধান এবং টাইপ ডিজাইনকে নিখুঁত করার অটল প্রতিশ্রুতি দ্বারা গঠিত।
-                    </p>
+            @php($about = aboutUsContent())
+            @if($about)
+                <div class="bg-white max-w-6xl mx-auto mb-16 rounded-xl shadow-lg p-8 about-content">
+                    {!! $about !!}
                 </div>
-            </div>
+            @else
+                <!-- Fallback static content -->
+                <!-- Origin Story -->
+                <div class="max-w-4xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের উৎপত্তির গল্প</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6 bengali-text">
+                            {{ siteTitle() }} (পূর্বে <strong>বাংলা ফন্ট</strong>) ২০২৩ সালে জন্মগ্রহণ করে, যখন বিশ্ব ডিজিটাল বিপ্লবের মধ্য দিয়ে যাচ্ছিল। 
+                            যা শুরু হয়েছিল গ্রাফিক ডিজাইনের প্রতি কৌতূহল থেকে, তা পরিণত হয়েছিল টাইপোগ্রাফির প্রতি গভীর ভালোবাসায়। 
+                            শীঘ্রই, {{ siteTitle() }} বাংলা ফন্টের জন্য একটি দূরদর্শী টাইপ ফাউন্ড্রি হিসেবে আবির্ভূত হয়।
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed bengali-text">
+                            বিনয়ী শুরু থেকে, আমরা প্রতিভাবান ডিজাইনারদের নেটওয়ার্কের সাথে সহযোগিতা করে আমাদের প্রথম টাইপফেস তৈরি করি। 
+                            এটি ছিল আমাদের যাত্রার শুরু, একটি পথ যা আবেগ, অনুসন্ধান এবং টাইপ ডিজাইনকে নিখুঁত করার অটল প্রতিশ্রুতি দ্বারা গঠিত।
+                        </p>
+                    </div>
+                </div>
 
-            <!-- Our Journey -->
-            <div class="max-w-4xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের যাত্রা</h2>
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <p class="text-lg text-gray-700 leading-relaxed mb-6 bengali-text">
-                        প্রাথমিক পর্যায়ে, আমরা চ্যালেঞ্জের মুখোমুখি হয়েছিলাম, ডিজাইন নির্ভুলতার সাথে সংগ্রাম করেছিলাম এবং পরিপক্ক গবেষণা ক্ষমতার অভাব ছিল। 
-                        কিন্তু সময়ের সাথে সাথে, আমরা বড় হয়েছি, শিখেছি এবং আমাদের দক্ষতা উন্নত করেছি। আজ, আমাদের সূক্ষ্মভাবে তৈরি ফন্ট তৈরি করার দক্ষতা রয়েছে, 
-                        যা টাইপোগ্রাফিক নীতি এবং সাংস্কৃতিক তাৎপর্যের গভীর বোধগম্যতার সাথে অনুপ্রাণিত।
-                    </p>
+                <!-- Our Journey -->
+                <div class="max-w-4xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের যাত্রা</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6 bengali-text">
+                            প্রাথমিক পর্যায়ে, আমরা চ্যালেঞ্জের মুখোমুখি হয়েছিলাম, ডিজাইন নির্ভুলতার সাথে সংগ্রাম করেছিলাম এবং পরিপক্ক গবেষণা ক্ষমতার অভাব ছিল। 
+                            কিন্তু সময়ের সাথে সাথে, আমরা বড় হয়েছি, শিখেছি এবং আমাদের দক্ষতা উন্নত করেছি। আজ, আমাদের সূক্ষ্মভাবে তৈরি ফন্ট তৈরি করার দক্ষতা রয়েছে, 
+                            যা টাইপোগ্রাফিক নীতি এবং সাংস্কৃতিক তাৎপর্যের গভীর বোধগম্যতার সাথে অনুপ্রাণিত।
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Our Mission -->
-            <div class="max-w-4xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের মিশন</h2>
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <p class="text-lg text-gray-700 leading-relaxed mb-6 bengali-text">
-                        {{ siteTitle() }}-এ, আমাদের মিশন হল ঐতিহ্যকে উদ্ভাবন এবং প্রবেশযোগ্যতার সাথে একত্রিত করা। আমাদের টাইপফেসগুলি এই বিশ্বাসের সাথে নির্মিত যে 
-                        টাইপোগ্রাফি আমাদের চারপাশের বিশ্বে একটি গুরুত্বপূর্ণ ভূমিকা পালন করে। এটি একটি সর্বজনীন ভাষা, যা নির্ধারণ করে আমরা কীভাবে যোগাযোগ করি, 
-                        প্রকাশ করি এবং মিথস্ক্রিয়া করি।
-                    </p>
-                    <p class="text-lg text-gray-700 leading-relaxed bengali-text">
-                        ওপেন-সোর্স ডিজাইনের প্রতি আমাদের নিষ্ঠা আমাদের বাংলা ফন্টের বৃহত্তম ওপেন-সোর্স লাইব্রেরি তৈরি করতে পরিচালিত করেছে, 
-                        যা বিশ্বব্যাপী ফন্ট ইকোসিস্টেমে একটি উল্লেখযোগ্য অবদান রাখছে এবং বিশ্বব্যাপী ডিজাইনার, স্রষ্টা এবং ব্র্যান্ডগুলিকে ক্ষমতায়ন করছে।
-                    </p>
+                <!-- Our Mission -->
+                <div class="max-w-4xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের মিশন</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6 bengali-text">
+                            {{ siteTitle() }}-এ, আমাদের মিশন হল ঐতিহ্যকে উদ্ভাবন এবং প্রবেশযোগ্যতার সাথে একত্রিত করা। আমাদের টাইপফেসগুলি এই বিশ্বাসের সাথে নির্মিত যে 
+                            টাইপোগ্রাফি আমাদের চারপাশের বিশ্বে একটি গুরুত্বপূর্ণ ভূমিকা পালন করে। এটি একটি সর্বজনীন ভাষা, যা নির্ধারণ করে আমরা কীভাবে যোগাযোগ করি, 
+                            প্রকাশ করি এবং মিথস্ক্রিয়া করি।
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed bengali-text">
+                            ওপেন-সোর্স ডিজাইনের প্রতি আমাদের নিষ্ঠা আমাদের বাংলা ফন্টের বৃহত্তম ওপেন-সোর্স লাইব্রেরি তৈরি করতে পরিচালিত করেছে, 
+                            যা বিশ্বব্যাপী ফন্ট ইকোসিস্টেমে একটি উল্লেখযোগ্য অবদান রাখছে এবং বিশ্বব্যাপী ডিজাইনার, স্রষ্টা এবং ব্র্যান্ডগুলিকে ক্ষমতায়ন করছে।
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Our Creative Process -->
-            <div class="max-w-4xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের সৃজনশীল প্রক্রিয়া</h2>
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <p class="text-lg text-gray-700 leading-relaxed bengali-text">
-                        আমাদের সৃজনশীল প্রক্রিয়া শুরু হয় মূল ধারণার স্কেচিং দিয়ে, তারপর বিস্তৃত গবেষণা এবং পরিশোধন। একবার একটি ধারণা প্রতিষ্ঠিত হলে, 
-                        আমরা সম্পূর্ণ গ্লিফ সেট ডিজাইন করি, নিশ্চিত করি যে প্রতিটি বক্ররেখা, কোণ এবং রূপ সাবধানে বিবেচনা করা হয়। 
-                        এরপর, আমরা প্রতিটি টাইপফেসকে নিরবিচ্ছিন্ন ডিজিটাল ব্যবহারের জন্য সূক্ষ্মভাবে বিকাশ করি।
-                    </p>
+                <!-- Our Creative Process -->
+                <div class="max-w-4xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের সৃজনশীল প্রক্রিয়া</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <p class="text-lg text-gray-700 leading-relaxed bengali-text">
+                            আমাদের সৃজনশীল প্রক্রিয়া শুরু হয় মূল ধারণার স্কেচিং দিয়ে, তারপর বিস্তৃত গবেষণা এবং পরিশোধন। একবার একটি ধারণা প্রতিষ্ঠিত হলে, 
+                            আমরা সম্পূর্ণ গ্লিফ সেট ডিজাইন করি, নিশ্চিত করি যে প্রতিটি বক্ররেখা, কোণ এবং রূপ সাবধানে বিবেচনা করা হয়। 
+                            এরপর, আমরা প্রতিটি টাইপফেসকে নিরবিচ্ছিন্ন ডিজিটাল ব্যবহারের জন্য সূক্ষ্মভাবে বিকাশ করি।
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Our Vision -->
-            <div class="max-w-4xl mx-auto mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের দৃষ্টিভঙ্গি</h2>
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <p class="text-lg text-gray-700 leading-relaxed bengali-text">
-                        {{ siteTitle() }} শুধু একটি ফাউন্ড্রি নয়, এটি একটি আন্দোলন যা ভবিষ্যত প্রজন্মের জন্য বাংলা টাইপোগ্রাফির সমৃদ্ধ ঐতিহ্য সংরক্ষণ, 
-                        উদ্ভাবন এবং উন্নত করার জন্য। আমরা চাই বাংলা সেই বিশ্বব্যাপী ভাষাগুলির পাশে বসুক যাদের নিজস্ব হাজার হাজার ফন্ট রয়েছে।
-                    </p>
+                <!-- Our Vision -->
+                <div class="max-w-4xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 bengali-text">আমাদের দৃষ্টিভঙ্গি</h2>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <p class="text-lg text-gray-700 leading-relaxed bengali-text">
+                            {{ siteTitle() }} শুধু একটি ফাউন্ড্রি নয়, এটি একটি আন্দোলন যা ভবিষ্যত প্রজন্মের জন্য বাংলা টাইপোগ্রাফির সমৃদ্ধ ঐতিহ্য সংরক্ষণ, 
+                            উদ্ভাবন এবং উন্নত করার জন্য। আমরা চাই বাংলা সেই বিশ্বব্যাপী ভাষাগুলির পাশে বসুক যাদের নিজস্ব হাজার হাজার ফন্ট রয়েছে।
+                        </p>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <!-- Meet Our Team -->
             <div class="max-w-6xl mx-auto mb-16">
