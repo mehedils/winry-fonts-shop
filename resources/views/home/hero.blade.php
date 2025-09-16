@@ -1,35 +1,25 @@
 @if($sliders->count() > 0)
-    <div class="swiper hero-swiper" style="height: 50vh; width: 90% !important; margin: 0 auto;">
-        <div class="swiper-wrapper">
+    <div class="swiper hero-swiper w-[90%] mx-auto">
+        <div class="swiper-wrapper " style="box-sizing: border-box;">
             @foreach($sliders as $slider)
-                <div class="swiper-slide relative overflow-hidden rounded-2xl" style="height: 50vh;">
-                    <div style="
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background-image: url('{{ $slider->image_url }}');
-                        background-size: cover;
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        z-index: 1;
-                    ">
-                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 2;"></div>
-                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center; z-index: 3; width: 90%; max-width: 1200px;">
+                <div class="swiper-slide relative overflow-hidden rounded-2xl h-[50vh] min-h-[400px] max-h-[600px] max-w-[90vw] mx-auto">
+                    <div class="absolute top-0 left-0 bg-contain bg-center bg-no-repeat w-full h-full bg-cover z-[1]" style="background-image: url('{{ $slider->image_url }}'); box-sizing: border-box; aspect-ratio: 16/9; width: 100vw; width:100%; background-size: cover; background-position: center; background-repeat: no-repeat;    ">
+                        <div class="absolute top-0 left-0 right-0 bottom-0 z-[2]"></div>
+
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center z-[3] w-[90%] max-w-6xl">
                             @if($slider->title)
-                                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 bengali-text" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+                                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 bengali-text drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)]">
                                     {{ $slider->title }}
                                 </h1>
                             @endif
                             @if($slider->description)
-                                <p class="text-lg md:text-xl lg:text-2xl mb-8 opacity-90 bengali-text" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
+                                <p class="text-lg md:text-xl lg:text-2xl mb-8 opacity-90 bengali-text drop-shadow-[1px_1px_2px_rgba(0,0,0,0.8)]">
                                     {{ $slider->description }}
                                 </p>
                             @endif
                             @if($slider->button_text && $slider->button_link)
                                 <div class="flex flex-col md:flex-row gap-4 justify-center">
-                                    <a href="{{ $slider->button_link }}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition bengali-text" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                                    <a href="{{ $slider->button_link }}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition bengali-text shadow-[0_4px_6px_rgba(0,0,0,0.3)]">
                                         {{ $slider->button_text }}
                                     </a>
                                 </div>

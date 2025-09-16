@@ -47,22 +47,19 @@ class HomeController extends Controller
                     'type' => $font->price > 0 ? 'premium' : 'free',
                     'name' => $font->name,
                     'display_name' => $font->name,
-                    'preview_text' => 'আমার বাংলা',
+                    'preview_text' => 'আমার সোনার বাংলা',
                     'description' => $font->description ?? 'বাংলা ফন্ট',
                     'price' => $font->price,
                     'downloads_count' => $font->downloads_count ?? 0, // Actual database value
                     'font_file_path' => $font->font_file_path,
+                    'preview_image_path' => $font->preview_image_path,
+                    'preview_images' => $font->preview_images ?? [],
+                    'slider_images' => $font->slider_images ?? [],
                     'category' => $font->category,
                 ];
             });
 
-        $paymentMethods = [
-            (object) ['name' => 'bKash', 'logo' => 'https://via.placeholder.com/60x40/1e40af/ffffff?text=bKash'],
-            (object) ['name' => 'Nagad', 'logo' => 'https://via.placeholder.com/60x40/1e40af/ffffff?text=Nagad'],
-            (object) ['name' => 'Rocket', 'logo' => 'https://via.placeholder.com/60x40/1e40af/ffffff?text=Rocket'],
-            (object) ['name' => 'Card', 'logo' => 'https://via.placeholder.com/60x40/1e40af/ffffff?text=Card'],
-        ];
 
-        return view('home', compact('sliders', 'categories', 'featuredFonts', 'paymentMethods'));
+        return view('home', compact('sliders', 'categories', 'featuredFonts'));
     }
 }

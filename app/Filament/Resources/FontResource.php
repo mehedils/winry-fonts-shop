@@ -73,6 +73,44 @@ class FontResource extends Resource
                             ->downloadable(false)
                             ->previewable(false)
                             ->preserveFilenames(),
+                        
+                        Forms\Components\FileUpload::make('preview_image_path')
+                            ->label('Preview Image (PNG)')
+                            ->helperText('Single PNG image for font card preview (required for premium fonts)')
+                            ->directory('fonts/preview-images')
+                            ->acceptedFileTypes(['image/png'])
+                            ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ])
+                            ->downloadable(false)
+                            ->previewable(true)
+                            ->preserveFilenames()
+                            ->visible(fn (Forms\Get $get) => $get('price') > 0)
+                            ->required(fn (Forms\Get $get) => $get('price') > 0),
+                        
+                        Forms\Components\FileUpload::make('slider_images')
+                            ->label('Slider Images (PNG)')
+                            ->helperText('Multiple PNG images for font detail page slider (optional for premium fonts)')
+                            ->directory('fonts/slider-images')
+                            ->acceptedFileTypes(['image/png'])
+                            ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ])
+                            ->downloadable(false)
+                            ->previewable(true)
+                            ->preserveFilenames()
+                            ->multiple()
+                            ->reorderable()
+                            ->appendFiles()
+                            ->visible(fn (Forms\Get $get) => $get('price') > 0),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Contributors')

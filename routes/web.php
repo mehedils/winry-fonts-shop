@@ -205,6 +205,9 @@ Route::get('/fonts', function () {
             'price' => $font->price,
             'downloads_count' => $font->downloads_count ?? 0,
             'font_file_path' => $font->font_file_path,
+            'preview_image_path' => $font->preview_image_path,
+            'preview_images' => $font->preview_images ?? [],
+            'slider_images' => $font->slider_images ?? [],
             'category' => $font->category,
         ];
     });
@@ -241,6 +244,9 @@ Route::get('/fonts/{id}', function (int $id) {
         'published_at' => $font->published_date?->format('Y-m-d') ?? '2025-08-16',
         'downloads_count' => $font->downloads_count ?? 0,
         'font_file_path' => $font->font_file_path,
+        'preview_image_path' => $font->preview_image_path,
+        'preview_images' => $font->preview_images ?? [],
+        'slider_images' => $font->slider_images ?? [],
         'glyphs' => $font->glyphs ?? count($basicGlyphs) + count($marks) + count($complexGlyphs),
         'supported_encodings' => $font->supported_encodings ?? 'UTF-8, Unicode 6.0+',
     ];

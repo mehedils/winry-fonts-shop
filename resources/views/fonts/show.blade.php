@@ -3,38 +3,90 @@
 @section('title', $fontData->display_name . ' - ' . siteTitle())
 
 @section('content')
-    <section class="py-10 bg-white">
+    <section class="py-6 sm:py-8 md:py-10 bg-white">
         <div class="container mx-auto px-4 max-w-6xl">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="md:col-span-2">
-                    <h1 class="text-4xl font-bold text-gray-900 bengali-text">{{ $fontData->display_name }}</h1>
-                    <p class="text-gray-600 mt-2 bengali-text">{{ $fontData->description }}</p>
+            <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
+                <div class="lg:col-span-2">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 bengali-text">{{ $fontData->display_name }}</h1>
+                    <p class="text-gray-600 mt-2 text-sm sm:text-base bengali-text">{{ $fontData->description }}</p>
 
                     <!-- Font Details -->
-                    <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="flex items-center gap-3">
-                                <i class="fas fa-language text-blue-600"></i>
+                    <div class="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
+                        <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                            <div class="flex items-center gap-2 sm:gap-3">
+                                <i class="fas fa-language text-blue-600 text-sm sm:text-base"></i>
                                 <div>
-                                    <div class="font-semibold bengali-text">Supported Encodings</div>
-                                    <div class="text-gray-700">{{ $fontData->supported_encodings }}</div>
+                                    <div class="font-semibold text-xs sm:text-sm bengali-text">Supported Encodings</div>
+                                    <div class="text-gray-700 text-xs sm:text-sm">{{ $fontData->supported_encodings }}</div>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <i class="fas fa-font text-green-600"></i>
+                            <div class="flex items-center gap-2 sm:gap-3">
+                                <i class="fas fa-font text-green-600 text-sm sm:text-base"></i>
                                 <div>
-                                    <div class="font-semibold bengali-text">Number of Glyphs</div>
-                                    <div class="text-gray-700">{{ $fontData->glyphs }} characters</div>
+                                    <div class="font-semibold text-xs sm:text-sm bengali-text">Number of Glyphs</div>
+                                    <div class="text-gray-700 text-xs sm:text-sm">{{ $fontData->glyphs }} characters</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-8 bg-white border rounded-lg p-6">
-                        <h2 class="text-2xl font-bold mb-6 bengali-text flex items-center gap-2">
-                            <i class="fas fa-edit text-blue-600"></i>
-                            Type Tester
-                        </h2>
+                    @if($fontData->price > 0)
+                        <!-- Premium Font Preview Slider -->
+                        <div class="mt-6 sm:mt-8 bg-white border rounded-lg p-4 sm:p-6">
+                            <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 bengali-text flex items-center gap-2">
+                                <i class="fas fa-images text-blue-600 text-lg sm:text-xl"></i>
+                                Font Style Preview
+                            </h2>
+                            <div class="bg-gray-50 rounded-lg p-2 sm:p-4 w-full overflow-hidden">
+                                @if(!empty($fontData->slider_images) && count($fontData->slider_images) > 1)
+                                    <!-- Swiper Container -->
+                                    <div class="swiper font-preview-swiper w-full max-w-full">
+                                        <div class="swiper-wrapper">
+                                            @foreach($fontData->slider_images as $image)
+                                                <div class="swiper-slide">
+                                                    <div class="text-center w-full h-full flex items-center justify-center">
+                                                        <img src="{{ asset('storage/' . $image) }}" 
+                                                             alt="{{ $fontData->display_name }} Style {{ $loop->iteration }}" 
+                                                             class="w-full h-full object-contain rounded-lg shadow-lg">
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <!-- Navigation buttons -->
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-button-prev"></div>
+                                        <!-- Pagination -->
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+                                @elseif(!empty($fontData->slider_images) && count($fontData->slider_images) == 1)
+                                    <!-- Single image fallback -->
+                                    <div class="text-center w-full max-w-full overflow-hidden">
+                                        <img src="{{ asset('storage/' . $fontData->slider_images[0]) }}" 
+                                             alt="{{ $fontData->display_name }} Preview" 
+                                             class="w-full max-w-full max-h-96 object-contain mx-auto rounded-lg shadow-lg">
+                                    </div>
+                                @else
+                                    <!-- No slider images yet - placeholder -->
+                                    <div class="text-center py-12">
+                                        <div class="w-24 h-24 mx-auto mb-4 bg-gray-200 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-image text-gray-400 text-3xl"></i>
+                                        </div>
+                                        <h3 class="text-lg font-semibold text-gray-700 mb-2 bengali-text">স্লাইডার ইমেজ যোগ করা হয়নি</h3>
+                                        <p class="text-sm text-gray-500 bengali-text">এই ফন্টের জন্য স্লাইডার ইমেজ যোগ করতে অ্যাডমিন প্যানেলে যান</p>
+                                    </div>
+                                @endif
+                                <p class="text-sm text-gray-600 mt-4 text-center bengali-text">
+                                    এই ফন্টটি প্রিমিয়াম। সম্পূর্ণ ফন্ট ডাউনলোড করতে ক্রয় করুন।
+                                </p>
+                            </div>
+                        </div>
+                    @else
+                        <!-- Free Font Type Tester -->
+                        <div class="mt-8 bg-white border rounded-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6 bengali-text flex items-center gap-2">
+                                <i class="fas fa-edit text-blue-600"></i>
+                                Type Tester
+                            </h2>
                         
                         <!-- Text Input Section -->
                         <div class="grid md:grid-cols-4 gap-4 mb-6">
@@ -117,7 +169,9 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
+                    @if($fontData->price == 0)
                     <div class="mt-8 bg-white border rounded-lg p-6">
                         <h2 class="text-2xl font-bold mb-6 bengali-text flex items-center gap-2">
                             <i class="fas fa-font text-blue-600"></i>
@@ -164,6 +218,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
                     <!-- Designer and Developer Section -->
                     <div class="mt-8 bg-white border rounded-lg p-6">
@@ -241,22 +296,22 @@
                     </div>
                 </div>
 
-                <aside class="md:col-span-1">
-                    <div class="border rounded-lg p-6 sticky top-24">
-                        <div class="text-3xl font-bold text-blue-600 mb-4">
+                <aside class="lg:col-span-1 order-first lg:order-last">
+                    <div class="border rounded-lg p-4 sm:p-6 lg:sticky lg:top-24">
+                        <div class="text-2xl sm:text-3xl font-bold text-blue-600 mb-3 sm:mb-4">
                             {{ $fontData->price > 0 ? '৳'.number_format($fontData->price) : 'ফ্রি' }}
                         </div>
                         @if($fontData->type === 'free')
-                            <a href="{{ route('fonts.download', $fontData->id) }}" class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 block text-center bengali-text">
+                            <a href="{{ route('fonts.download', $fontData->id) }}" class="w-full bg-green-600 text-white px-4 py-2 sm:py-3 rounded-lg hover:bg-green-700 block text-center bengali-text text-sm sm:text-base font-medium">
                                 ডাউনলোড
                             </a>
                         @else
-                            <a href="{{ route('orders.create', $fontData->id) }}" class="w-full btn-primary text-white px-4 py-2 rounded-lg block text-center bengali-text">
+                            <a href="{{ route('orders.create', $fontData->id) }}" class="w-full btn-primary text-white px-4 py-2 sm:py-3 rounded-lg block text-center bengali-text text-sm sm:text-base font-medium">
                                 কিনুন
                             </a>
                         @endif
 
-                        <div class="mt-6 text-sm text-gray-600 space-y-2">
+                        <div class="mt-4 sm:mt-6 text-xs sm:text-sm text-gray-600 space-y-1 sm:space-y-2">
                             <div class="bengali-text">প্রকাশিত: {{ 
                                 \Illuminate\Support\Carbon::parse($fontData->published_at)->translatedFormat('d F, Y') 
                             }}</div>
@@ -271,7 +326,10 @@
 @endsection
 
 @push('styles')
-@if($fontData->font_file_path)
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+@if($fontData->font_file_path && $fontData->price == 0)
 <style>
     @font-face {
         font-family: '{{ $fontData->name }}';
@@ -281,10 +339,295 @@
     }
 </style>
 @endif
+
+@if($fontData->price > 0)
+<style>
+/* Font Preview Swiper Styles */
+.font-preview-swiper {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.font-preview-swiper .swiper-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.font-preview-swiper .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 20px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+}
+
+.font-preview-swiper .swiper-slide img {
+    width: 100% !important;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+    max-width: 100% !important;
+    max-height: 100%;
+    box-sizing: border-box;
+}
+
+.font-preview-swiper .swiper-slide img:hover {
+    transform: scale(1.02);
+}
+
+/* Navigation buttons */
+.font-preview-swiper .swiper-button-next,
+.font-preview-swiper .swiper-button-prev {
+    color: #3b82f6;
+    background: rgba(255, 255, 255, 0.95);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.font-preview-swiper .swiper-button-next:hover,
+.font-preview-swiper .swiper-button-prev:hover {
+    background: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.font-preview-swiper .swiper-button-next:after,
+.font-preview-swiper .swiper-button-prev:after {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Pagination */
+.font-preview-swiper .swiper-pagination {
+    bottom: 20px;
+}
+
+.font-preview-swiper .swiper-pagination-bullet {
+    background: #3b82f6;
+    opacity: 0.6;
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    transition: all 0.3s ease;
+}
+
+.font-preview-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.3);
+    background: #1d4ed8;
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) {
+    .font-preview-swiper {
+        height: 450px;
+        padding: 0 15px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .font-preview-swiper .swiper-slide {
+        padding: 15px;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-slide img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100%;
+        object-fit: contain;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-button-next,
+    .font-preview-swiper .swiper-button-prev {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .font-preview-swiper .swiper-button-next:after,
+    .font-preview-swiper .swiper-button-prev:after {
+        font-size: 16px;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .font-preview-swiper {
+        height: 350px;
+        padding: 0 5px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .font-preview-swiper .swiper-slide {
+        padding: 5px;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-slide img {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100%;
+        object-fit: contain;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-button-next,
+    .font-preview-swiper .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .font-preview-swiper .swiper-button-next:after,
+    .font-preview-swiper .swiper-button-prev:after {
+        font-size: 14px;
+    }
+    
+    .font-preview-swiper .swiper-pagination {
+        bottom: 15px;
+    }
+    
+    .font-preview-swiper .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+    }
+}
+
+/* Small mobile responsive */
+@media (max-width: 480px) {
+    .font-preview-swiper {
+        height: 280px;
+        padding: 0 2px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .font-preview-swiper .swiper-slide {
+        padding: 2px;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-slide img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+    
+    .font-preview-swiper .swiper-button-next,
+    .font-preview-swiper .swiper-button-prev {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .font-preview-swiper .swiper-button-next:after,
+    .font-preview-swiper .swiper-button-prev:after {
+        font-size: 12px;
+    }
+    
+    .font-preview-swiper .swiper-pagination {
+        bottom: 10px;
+    }
+    
+    .font-preview-swiper .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+    }
+    }
+</style>
+@endif
 @endpush
 
 @push('scripts')
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
 <script>
+    // Initialize Font Preview Swiper for premium fonts
+    document.addEventListener('DOMContentLoaded', function() {
+        @if($fontData->price > 0 && !empty($fontData->slider_images) && count($fontData->slider_images) > 1)
+        const fontPreviewSwiper = new Swiper('.font-preview-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.font-preview-swiper .swiper-button-next',
+                prevEl: '.font-preview-swiper .swiper-button-prev',
+            },
+            pagination: {
+                el: '.font-preview-swiper .swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                }
+            }
+        });
+        @endif
+    });
+
     function setTesterText(text) {
         const input = document.getElementById('tester-input');
         input.value = text;

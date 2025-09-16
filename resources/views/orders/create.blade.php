@@ -3,16 +3,7 @@
 @section('title', 'অর্ডার করুন - ' . $font->name)
 
 @push('styles')
-@if($font->font_file_path)
-<style>
-@font-face {
-    font-family: 'OrderFont{{ $font->id }}';
-    src: url('{{ asset('storage/' . $font->font_file_path) }}') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-</style>
-@endif
+{{-- Font preview removed for premium fonts for security --}}
 @endpush
 
 @section('content')
@@ -24,15 +15,6 @@
             <div class="border-b pb-6 mb-6">
                 <h1 class="text-2xl font-bold text-gray-800 mb-4 bengali-text">অর্ডার করুন</h1>
                 <div class="flex items-start space-x-4">
-                    <!-- Font Preview -->
-                    @if($font->font_file_path)
-                    <div class="bg-gray-100 rounded-lg p-6 text-center min-w-[200px]">
-                        <p class="text-2xl text-gray-800 bengali-text" style="font-family: 'OrderFont{{ $font->id }}', 'Hind Siliguri', sans-serif;">
-                            আমার বাংলা
-                        </p>
-                    </div>
-                    @endif
-                    
                     <!-- Font Details -->
                     <div class="bg-gray-100 rounded-lg p-4 flex-1">
                         <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ $font->name }}</h3>
@@ -71,8 +53,7 @@
                         </div>
                     @endif
                     <p><strong>২.</strong> পেমেন্ট সম্পন্ন হওয়ার পর Transaction ID এবং আপনার তথ্য দিয়ে নিচের ফর্ম পূরণ করুন।</p>
-                    <p><strong>৩.</strong> পেমেন্টের স্ক্রিনশট আপলোড করুন (ঐচ্ছিক কিন্তু সুপারিশকৃত)।</p>
-                    <p><strong>৪.</strong> আমরা ২৪ ঘন্টার মধ্যে যাচাই করে আপনার ইমেইলে ফন্ট পাঠিয়ে দেব।</p>
+                    <p><strong>৩.</strong> পেমেন্টের স্ক্রিনশট আপলোড করুন (ঐচ্ছিক)।</p>
                 </div>
             </div>
 
