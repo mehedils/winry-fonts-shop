@@ -9,6 +9,7 @@
     <!-- Meta Tags -->
     <meta name="description" content="@yield('description', \App\Helpers\SettingsHelper::siteDescription())">
     <meta name="keywords" content="@yield('keywords', \App\Helpers\SettingsHelper::siteKeywords())">
+    @include('partials.seo')
     
     <!-- Favicon -->
     @if(\App\Helpers\SettingsHelper::siteFavicon())

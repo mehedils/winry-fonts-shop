@@ -1,9 +1,10 @@
 @if($sliders->count() > 0)
-    <div class="swiper hero-swiper w-[90%] mx-auto">
-        <div class="swiper-wrapper " style="box-sizing: border-box;">
+    <div class="w-[90%] mx-auto">
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
             @foreach($sliders as $slider)
-                <div class="swiper-slide relative overflow-hidden rounded-2xl h-[50vh] min-h-[400px] max-h-[600px] max-w-[90vw] mx-auto">
-                    <div class="absolute top-0 left-0 bg-contain bg-center bg-no-repeat w-full h-full bg-cover z-[1]" style="background-image: url('{{ $slider->image_url }}'); box-sizing: border-box; aspect-ratio: 16/9; width: 100vw; width:100%; background-size: cover; background-position: center; background-repeat: no-repeat;    ">
+                <div class="swiper-slide relative overflow-hidden rounded-2xl h-[50vh] min-h-[400px] max-h-[600px] w-full mx-auto">
+                    <div class="absolute top-0 left-0 bg-center bg-no-repeat w-full h-full bg-cover z-[1]" style="background-image: url('{{ $slider->image_url }}');">
                         <div class="absolute top-0 left-0 right-0 bottom-0 z-[2]"></div>
 
                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center z-[3] w-[90%] max-w-6xl">
@@ -28,8 +29,9 @@
                     </div>
                 </div>
             @endforeach
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
-        <div class="swiper-pagination"></div>
     </div>
 @else
     <section id="home" class="hero-section text-white py-20">
